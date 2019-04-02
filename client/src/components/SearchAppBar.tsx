@@ -107,7 +107,7 @@ function SearchAppBar(props: Props) {
                         />
                     </div>
                     <Button href="/login" color="inherit">Login</Button>
-                    <Button color="inherit">Register</Button>
+                    <Button href="/register" color="inherit">Register</Button>
                 </Toolbar>
             </AppBar>
         </div>
