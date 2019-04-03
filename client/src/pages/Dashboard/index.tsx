@@ -40,7 +40,7 @@ class Index extends React.Component<Props, State> {
     buildCard = function (str: string, index: number, classes: any): any {
         return (
             <Grid key={index} item xs={3}>
-                <Card className={classes.card}>
+                <Card>
                     <CardContent>
                         <CardMedia
                             className={classes.media}
@@ -54,8 +54,8 @@ class Index extends React.Component<Props, State> {
                                 Description
                             </Typography>
                         </CardContent>
+                        <Button variant='outlined' color='secondary' href='/productDetail'>Detail</Button>
                     </CardContent>
-                    <Button variant='outlined' color='secondary' href='/productDetail'>Detail</Button>
                 </Card>
             </Grid>
         )

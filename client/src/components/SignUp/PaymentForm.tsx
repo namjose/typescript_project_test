@@ -1,75 +1,55 @@
-import * as React from 'react';
-import {
-    AppBar,
-    Button,
-    Card,
-    CardContent,
-    createStyles,
-    TextField,
-    Theme,
-    Toolbar,
-    Typography, withStyles, WithStyles
-} from "@material-ui/core";
+import * as React from "react";
+import { AppBar, TextField, Grid } from "@material-ui/core";
 
-
-const styles = (theme: Theme) =>
-    createStyles({
-        root: {
-            display: 'inline-block',
-            flexGrow: 1,
-            margin: '50px',
-        },
-        card: {
-            width: 600
-        }
-    })
-
-interface Props extends WithStyles<typeof styles> {
-    prevStep: any,
-    handleChange: any,
-    values: any
+interface Props {
+  handleChange: any;
+  values: any;
 }
 
 class PaymentForm extends React.Component<Props> {
-    back = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        this.props.prevStep();
-    };
-
-    render() {
-        const {classes, values, handleChange} = this.props;
-
-        return (
-            <main className={classes.root}>
-                <Card className={classes.card}>
-                    <AppBar position="static" color="secondary">
-                        <Toolbar>
-                            <Typography variant="h6" color="inherit">
-                                Card Information
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
-                    <CardContent>
-                        <AppBar title="Enter Personal Details"/>
-                        <TextField
-                            id="card_number"
-                            label="Card Number"
-                            value={values.card_number}
-                            onChange={handleChange('card_number')}
-                            margin="normal"
-                        />
-                        <br/>
-                        <Button
-                            variant="outlined"
-                            color="secondary"
-                            onClick={this.back}>
-                            Back
-                        </Button>
-                    </CardContent>
-                </Card>
-            </main>
-        )
-    }
+  render() {
+    const { values, handleChange } = this.props;
+    return (
+      <React.Fragment>
+        <Grid item xs={12}>
+          <TextField
+            required
+            fullWidth
+            variant="outlined"
+            id="card_number"
+            label="Card Number"
+            value={values.card_number}
+            onChange={handleChange("card_number")}
+            margin="normal"
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            required
+            fullWidth
+            variant="outlined"
+            id="expDate"
+            label="Expiry Date"
+            value={values.expDate}
+            onChange={handleChange("expDate")}
+            margin="normal"
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            required
+            fullWidth
+            variant="outlined"
+            id="cvv"
+            label="CVV"
+            value={values.cvv}
+            onChange={handleChange("cvv")}
+            margin="normal"
+          />
+        </Grid>
+      </React.Fragment>
+    );
+  }
 }
 
-export default withStyles(styles)(PaymentForm);
+export default PaymentForm;

@@ -1,101 +1,129 @@
-import * as React from 'react';
-import {
-    AppBar,
-    Button,
-    Card,
-    CardContent, CardHeader,
-    createStyles,
-    TextField,
-    Theme, Toolbar, Typography,
-    withStyles,
-    WithStyles
-} from "@material-ui/core";
+import * as React from "react";
+import { IconButton, InputAdornment, TextField, Grid } from "@material-ui/core";
+import { AccountCircle, Visibility, VisibilityOff } from "@material-ui/icons";
+import Icon from "@material-ui/core/Icon";
 
-const styles = (theme: Theme) =>
-    createStyles({
-        root: {
-            display: 'inline-block',
-            flexGrow: 1,
-            margin: '50px',
-        },
-        card: {
-            width: 600
-        }
-    })
-
-interface Props extends WithStyles<typeof styles> {
-    nextStep: any,
-    handleChange: any,
-    values: any
+interface Props {
+  handleChange: any;
+  values: any;
+  classes: any;
 }
 
-class PersonalForm extends React.Component<Props> {
-    continue = (e: React.FormEvent) => {
-        e.preventDefault();
-        this.props.nextStep();
-    };
-
-    render() {
-        const {classes, values, handleChange} = this.props;
-
-        return (
-            <main className={classes.root}>
-                <Card className={classes.card}>
-                    <AppBar position="static" color="secondary">
-                        <Toolbar>
-                            <Typography variant="h6" color="inherit">
-                                Personal Information
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
-                    <CardContent>
-                        <TextField
-                            id="username"
-                            label="Username"
-                            name="username"
-                            value={values.username}
-                            onChange={handleChange('username')}
-                            margin="normal"
-                        />
-                        <br/>
-                        <TextField
-                            id="password"
-                            label="Password"
-                            name="password"
-                            value={values.password}
-                            onChange={handleChange('password')}
-                            margin="normal"
-                        />
-                        <br/>
-                        <TextField
-                            id="full_name"
-                            label="Full Name"
-                            name="full_name"
-                            value={values.full_name}
-                            onChange={handleChange('full_name')}
-                            margin="normal"
-                        />
-                        <br/>
-                        <TextField
-                            id="email"
-                            label="Email"
-                            name="email"
-                            value={values.email}
-                            onChange={handleChange('email')}
-                            margin="normal"
-                        />
-                        <br/>
-                        <Button
-                            variant="outlined"
-                            color="secondary"
-                            onClick={this.continue}>
-                            Continue
-                        </Button>
-                    </CardContent>
-                </Card>
-            </main>
-        )
-    }
+interface State {
+  showPassword: boolean;
 }
 
-export default withStyles(styles)(PersonalForm);
+class PersonalForm extends React.Component<Props, State> {
+  state = {
+    showPassword: false,
+  };
+
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
+
+  render() {
+    const { showPassword } = this.state;
+    const { classes, values, handleChange } = this.props;
+    return (
+      <React.Fragment>
+        <Grid item xs={6}>
+          <TextField
+            required
+            fullWidth
+            className={classes.textField}
+            variant="outlined"
+            id="username"
+            label="Username"
+            name="username"
+            value={values.username}
+            onChange={handleChange("username")}
+            margin="normal"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircle />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            required
+            fullWidth
+            className={classes.textField}
+            variant="outlined"
+            type={showPassword ? "text" : "password"}
+            id="password"
+            label="Password"
+            name="password"
+            value={values.password}
+            onChange={handleChange("password")}
+            margin="normal"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="Toggle password visibility"
+                    onClick={this.handleClickShowPassword}
+                  >
+                    {this.state.showPassword ? (
+                      <VisibilityOff />
+                    ) : (
+                      <Visibility />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            fullWidth
+            className={classes.textField}
+            variant="outlined"
+            id="email"
+            label="Email"
+            name="email"
+            value={values.email}
+            onChange={handleChange("email")}
+            margin="normal"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Icon>email</Icon>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            fullWidth
+            className={classes.textField}
+            variant="outlined"
+            id="full_name"
+            label="Full Name"
+            name="full_name"
+            value={values.full_name}
+            onChange={handleChange("full_name")}
+            margin="normal"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Icon>star</Icon>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+      </React.Fragment>
+    );
+  }
+}
+
+export default PersonalForm;
