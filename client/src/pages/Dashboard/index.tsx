@@ -1,80 +1,117 @@
-import * as React from 'react';
-import {Button, createStyles, Theme, withStyles, WithStyles} from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+import * as React from "react";
+import {
+  createStyles,
+  Grid,
+  Typography,
+  Theme,
+  withStyles,
+  WithStyles,
+} from "@material-ui/core";
+import { grey } from "@material-ui/core/colors";
+import FilterList from "./FilterList";
+import Item from "./Item";
 
 const styles = (theme: Theme) =>
-    createStyles({
-        root: {
-            flexGrow: 1,
-            margin: '50px',
-        },
-        media: {
-            width: 50,
-            height: 50,
-        },
-    })
+  createStyles({
+    header1: {
+      backgroundColor: "red",
+    },
+    header2: {
+      backgroundColor: grey[200],
+    },
+    mainView: {
+      marginTop: 50,
+    },
+    gridList: {
+      width: "100%",
+    },
+    title: {
+      fontWeight: "bold",
+    },
+    button_quickView: {
+      marginTop: -50,
+      background: "rgba(0, 0, 0, 0.5)",
+      position: "relative",
+    },
+    title_button: {
+      fontWeight: "bold",
+      color: "#fff",
+    },
+  });
 
-interface Props extends WithStyles<typeof styles> {
-}
+interface Props extends WithStyles<typeof styles> {}
 
 interface State {
-    user: string,
-    list_products: string[],
+  user: string;
+  list_products: string[];
+  isHovered: boolean;
 }
 
-let list: string[] = ["Ultraboost", "EQT", "Nike Air Max", "Air", "A", "B"];
+let list: string[] = [
+  "Ultraboost",
+  "EQT",
+  "Nike Air Max",
+  "Air",
+  "A",
+  "B",
+  "C",
+  "D",
+];
 
 class Index extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            user: "namjose",
-            list_products: list,
-        };
-    }
-
-    buildCard = function (str: string, index: number, classes: any): any {
-        return (
-            <Grid key={index} item xs={3}>
-                <Card>
-                    <CardContent>
-                        <CardMedia
-                            className={classes.media}
-                            title="Contemplative Reptile"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2" color='primary'>
-                                {str}
-                            </Typography>
-                            <Typography component="p">
-                                Description
-                            </Typography>
-                        </CardContent>
-                        <Button variant='outlined' color='secondary' href='/productDetail'>Detail</Button>
-                    </CardContent>
-                </Card>
-            </Grid>
-        )
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      user: "namjose",
+      list_products: list,
+      isHovered: false,
     };
+  }
 
-    render() {
-        const {classes} = this.props;
-        console.log(typeof classes);
-        return (
-            <main className={classes.root}>
-                <Typography variant="h4" align="left" color='primary'>ALL PRODUCTS</Typography>
-                <br/>
-                <Grid container item xs={12} spacing={16}>
-                    {this.state.list_products.map((data, index) => this.buildCard(data, index, classes))}
-                </Grid>
-            </main>
-        )
-    }
+  handleHover = (e: React.MouseEvent) => {
+    this.setState(prevState => ({
+      isHovered: !prevState.isHovered,
+    }));
+  };
+
+  buildCard = function(str: string, index: number): any {
+    return <Item keyItem={index} itemName={str} />;
+  };
+
+  render() {
+    const { isHovered } = this.state;
+    const { classes } = this.props;
+    console.log(typeof classes);
+    return (
+      <main>
+        <Grid container>
+          {/* <Grid justify="center" xs={12} className={classes.header1}>
+            <Typography variant="body1" color="secondary">
+              EASTER SALE DEAL OVER 50%
+            </Typography>
+          </Grid> */}
+          <Grid justify="center" xs={12} className={classes.header2}>
+            <Typography variant="h2" color="primary">
+              DC CONNECT OFFER
+            </Typography>
+            <Typography variant="h6" color="primary">
+              Up to 50% off
+            </Typography>
+          </Grid>
+          <Grid container xs={12} className={classes.mainView}>
+            <Grid item xs={2}>
+              <FilterList />
+            </Grid>
+            <Grid container xs={10} spacing={16}>
+              {list.map((data, index) => {
+                return <Item keyItem={index} itemName={data} />;
+              })}
+            </Grid>
+          </Grid>
+        </Grid>
+      </main>
+    );
+  }
 }
 
 export default withStyles(styles)(Index);
-

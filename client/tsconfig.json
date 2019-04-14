@@ -16,8 +16,8 @@
     "noImplicitAny": true,
     "importHelpers": true,
     "suppressImplicitAnyIndexErrors": true
-//    "strictNullChecks": true,
-//    "noUnusedLocals": true
+    //    "strictNullChecks": true,
+    //    "noUnusedLocals": true
   },
   "exclude": [
     "node_modules",

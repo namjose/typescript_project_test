@@ -12,7 +12,6 @@ import {
   withStyles,
   WithStyles,
   Grid,
-  CardHeader,
 } from "@material-ui/core";
 import PaymentForm from "./PaymentForm";
 import PersonalForm from "./PersonalForm";
@@ -28,21 +27,15 @@ const styles = (theme: Theme) =>
     card: {
       width: 500,
     },
-    instructions: {
-      marginTop: theme.spacing.unit,
-      marginBottom: theme.spacing.unit,
+    textField: {
+      // marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: "100%",
     },
     button: {
-      margin: "0 10px",
-    },
-    inputList: {
-      padding: "50px",
-    },
-    textField: {
-      flexBasis: 200,
-    },
-    header: {
-      backgroundColor: theme.palette.primary.main,
+      margin: theme.spacing.unit,
+      padding: "5px 5px",
+      fontWeight: "bold",
     },
   });
 
@@ -145,9 +138,21 @@ class SignUp extends React.Component<Props, State> {
           />
         );
       case 1:
-        return <PaymentForm handleChange={this.handleChange} values={values} />;
+        return (
+          <PaymentForm
+            handleChange={this.handleChange}
+            values={values}
+            classes={classes}
+          />
+        );
       case 2:
-        return <AddressForm handleChange={this.handleChange} values={values} />;
+        return (
+          <AddressForm
+            handleChange={this.handleChange}
+            values={values}
+            classes={classes}
+          />
+        );
       default:
         return null;
     }
@@ -161,11 +166,9 @@ class SignUp extends React.Component<Props, State> {
     );
   }
 
-  // Handle fields change
-  handleChange = (name: any, caseIndex: number) => (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    this.setState({ [name]: e.target.value } as Pick<State, keyof State>);
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value }: any = e.target;
+    this.setState({ [name]: value } as Pick<State, keyof State>);
   };
 
   handleStep = (index: number) => (e: React.MouseEvent) => {
@@ -204,56 +207,54 @@ class SignUp extends React.Component<Props, State> {
       postcodes,
     };
     return (
-      <React.Fragment>
-        <main className={classes.root}>
-          <Card className={classes.card}>
-            <Typography variant="h5" color="primary" align="center">
-              Sign up
-            </Typography>
-            <CardContent>
-              <Stepper nonLinear activeStep={step}>
-                {stepName.map((label: string, index: number) =>
-                  this.getStep(label, index),
+      <main className={classes.root}>
+        <Card className={classes.card}>
+          <Typography variant="h5" color="primary" align="center">
+            Sign up
+          </Typography>
+          <CardContent>
+            <Stepper nonLinear activeStep={step}>
+              {stepName.map((label: string, index: number) =>
+                this.getStep(label, index),
+              )}
+            </Stepper>
+            <Grid container spacing={16}>
+              {this.getStepContent(step, values, classes)}
+              <Grid item container justify="center" xs={12}>
+                {step !== 0 ? (
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={this.prevStep}
+                    className={classes.button}
+                  >
+                    BACK
+                  </Button>
+                ) : null}
+                {step === this.state.totalStep ? (
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={this.handleSubmit}
+                    className={classes.button}
+                  >
+                    SUBMIT
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={this.nextStep}
+                    className={classes.button}
+                  >
+                    NEXT
+                  </Button>
                 )}
-              </Stepper>
-              <Grid container spacing={16}>
-                {this.getStepContent(step, values, classes)}
-                <Grid item container justify="center" xs={12}>
-                  {step === this.state.totalStep ? (
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      onClick={this.handleSubmit}
-                      className={classes.button}
-                    >
-                      Submit
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      onClick={this.nextStep}
-                      className={classes.button}
-                    >
-                      Next
-                    </Button>
-                  )}
-                  {step !== 0 ? (
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      onClick={this.prevStep}
-                      className={classes.button}
-                    >
-                      Back
-                    </Button>
-                  ) : null}
-                </Grid>
               </Grid>
-            </CardContent>
-          </Card>
-        </main>
-      </React.Fragment>
+            </Grid>
+          </CardContent>
+        </Card>
+      </main>
     );
   }
 }

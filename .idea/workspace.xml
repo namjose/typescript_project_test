@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74d3c0ab-267c-4127-b34e-1077e9cd327d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/SignUp/PersonalForm.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/server/src/user/user.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/LogIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/LogIn.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/SearchAppBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SearchAppBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Dashboard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Dashboard/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SignUp/AddressForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SignUp/AddressForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SignUp/PaymentForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SignUp/PaymentForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SignUp/PersonalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SignUp/PersonalForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SignUp/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SignUp/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/tsconfig.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,32 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/components/SignUp/SignUp.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="966">
-              <caret line="45" column="44" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/src/pages/ProductDetail/index.tsx">
+        <entry file="file://$PROJECT_DIR$/client/src/pages/Dashboard/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/components/SignUp/PersonalForm.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="19" column="10" selection-start-line="19" selection-start-column="10" selection-end-line="22" selection-end-column="9" />
+            <state relative-caret-position="2484">
+              <caret line="108" column="31" lean-forward="true" selection-start-line="108" selection-start-column="31" selection-end-line="108" selection-end-column="31" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -54,22 +37,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/components/SignUp/PaymentForm.tsx">
+        <entry file="file://$PROJECT_DIR$/client/src/pages/Dashboard/FilterList.tsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="874">
-              <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/components/LogIn.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+              <caret line="38" column="33" lean-forward="true" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -78,10 +49,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/pages/Dashboard/index.tsx">
+        <entry file="file://$PROJECT_DIR$/client/src/components/LogIn.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
+            <state relative-caret-position="1495">
+              <caret line="65" column="58" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="58" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -116,19 +90,22 @@
         <option value="$PROJECT_DIR$/server/src/user/user.entity.ts" />
         <option value="$PROJECT_DIR$/server/src/shared/auth.guard.ts" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/client/src/components/SearchAppBar.tsx" />
+        <option value="$PROJECT_DIR$/client/src/pages/ProductDetail/index.tsx" />
+        <option value="$PROJECT_DIR$/client/src/components/SignUp/PersonalForm.tsx" />
+        <option value="$PROJECT_DIR$/client/src/components/SignUp/PaymentForm.tsx" />
+        <option value="$PROJECT_DIR$/client/src/components/SignUp/AddressForm.tsx" />
+        <option value="$PROJECT_DIR$/client/src/components/SignUp/SignUp.tsx" />
         <option value="$PROJECT_DIR$/client/src/components/LogIn.tsx" />
         <option value="$PROJECT_DIR$/client/src/App.tsx" />
-        <option value="$PROJECT_DIR$/client/src/components/SignUp/PaymentForm.tsx" />
-        <option value="$PROJECT_DIR$/client/src/components/SignUp/PersonalForm.tsx" />
-        <option value="$PROJECT_DIR$/client/src/components/SignUp/SignUp.tsx" />
+        <option value="$PROJECT_DIR$/client/src/components/SearchAppBar.tsx" />
+        <option value="$PROJECT_DIR$/client/src/pages/Dashboard/FilterList.tsx" />
         <option value="$PROJECT_DIR$/client/src/pages/Dashboard/index.tsx" />
-        <option value="$PROJECT_DIR$/client/src/pages/ProductDetail/index.tsx" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
+    <option name="x" value="-5" />
+    <option name="y" value="10" />
     <option name="width" value="1935" />
     <option name="height" value="1090" />
   </component>
@@ -140,66 +117,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="typescript_project_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="typescript_project_test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="typescript_project_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="typescript_project_test" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="typescript_project_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="typescript_project_test" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="typescript_project_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="typescript_project_test" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="typescript_project_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="typescript_project_test" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="SignUp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="typescript_project_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="typescript_project_test" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="typescript_project_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="typescript_project_test" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="Dashboard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="typescript_project_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="typescript_project_test" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="ProductDetail" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -207,7 +125,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.updates" />
     <property name="ts.external.directory.path" value="C:\Users\Bui Hoang Nam\Desktop\React Project\typescript_project_test\client\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -249,11 +167,17 @@
       <workItem from="1554181829052" duration="343000" />
       <workItem from="1554190800028" duration="14608000" />
       <workItem from="1554218544053" duration="22000" />
+      <workItem from="1554448430248" duration="598000" />
+      <workItem from="1554644679194" duration="863000" />
+      <workItem from="1554646678647" duration="635000" />
+      <workItem from="1554647404618" duration="11337000" />
+      <workItem from="1554707662663" duration="4148000" />
+      <workItem from="1554738247053" duration="2800000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40204000" />
+    <option name="totallyTimeSpent" value="60585000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
@@ -272,8 +196,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50033045" side_tool="true" weight="0.16388889" />
-      <window_info anchor="bottom" id="TypeScript" order="10" />
-      <window_info active="true" anchor="bottom" x="70" y="394" width="1513" height="150" id="Terminal" order="11" sideWeight="0.49966952" visible="true" weight="0.27638888" />
+      <window_info anchor="bottom" id="TypeScript" order="10" weight="0.32916668" />
+      <window_info active="true" anchor="bottom" x="70" y="394" width="1513" height="150" id="Terminal" order="11" sideWeight="0.49966952" visible="true" weight="0.26805556" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -459,15 +383,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/App.test.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -477,13 +392,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/index.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/SearchAppBar.tsx">
+    <entry file="file://$PROJECT_DIR$/client/src/pages/ProductDetail/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="109" column="43" selection-start-line="109" selection-start-column="43" selection-end-line="109" selection-end-column="43" />
+        <state relative-caret-position="115">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/SignUp/PaymentForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/SignUp/AddressForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -492,18 +428,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/App.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="31" column="41" lean-forward="true" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
+        <state relative-caret-position="-276">
+          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/SignUp/SignUp.tsx">
+    <entry file="file://$PROJECT_DIR$/client/src/index.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="966">
-          <caret line="45" column="44" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="44" />
+        <state>
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/public/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/SearchAppBar.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="92" column="106" lean-forward="true" selection-start-line="92" selection-start-column="106" selection-end-line="92" selection-end-column="106" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -512,45 +463,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/components/SignUp/PersonalForm.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="19" column="10" selection-start-line="19" selection-start-column="10" selection-end-line="22" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="46">
+          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="78" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/SignUp/PaymentForm.tsx">
+    <entry file="file://$PROJECT_DIR$/client/src/components/SignUp/SignUp.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+        <state relative-caret-position="253">
+          <caret line="32" column="44" lean-forward="true" selection-start-line="32" selection-start-column="44" selection-end-line="33" selection-end-column="26" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/LogIn.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/pages/Dashboard/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
+        <state relative-caret-position="2484">
+          <caret line="108" column="31" lean-forward="true" selection-start-line="108" selection-start-column="31" selection-end-line="108" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/pages/ProductDetail/index.tsx">
+    <entry file="file://$PROJECT_DIR$/client/src/pages/Dashboard/FilterList.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        <state relative-caret-position="874">
+          <caret line="38" column="33" lean-forward="true" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/LogIn.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1495">
+          <caret line="65" column="58" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

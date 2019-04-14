@@ -30,14 +30,13 @@ class PersonalForm extends React.Component<Props, State> {
         <Grid item xs={6}>
           <TextField
             required
-            fullWidth
             className={classes.textField}
             variant="outlined"
             id="username"
             label="Username"
             name="username"
             value={values.username}
-            onChange={handleChange("username")}
+            onChange={handleChange}
             margin="normal"
             InputProps={{
               startAdornment: (
@@ -51,7 +50,6 @@ class PersonalForm extends React.Component<Props, State> {
         <Grid item xs={6}>
           <TextField
             required
-            fullWidth
             className={classes.textField}
             variant="outlined"
             type={showPassword ? "text" : "password"}
@@ -59,7 +57,7 @@ class PersonalForm extends React.Component<Props, State> {
             label="Password"
             name="password"
             value={values.password}
-            onChange={handleChange("password")}
+            onChange={handleChange}
             margin="normal"
             InputProps={{
               endAdornment: (
@@ -82,14 +80,13 @@ class PersonalForm extends React.Component<Props, State> {
         <Grid item xs={12}>
           <TextField
             required
-            fullWidth
             className={classes.textField}
             variant="outlined"
             id="email"
             label="Email"
             name="email"
             value={values.email}
-            onChange={handleChange("email")}
+            onChange={handleChange}
             margin="normal"
             InputProps={{
               startAdornment: (
@@ -103,14 +100,13 @@ class PersonalForm extends React.Component<Props, State> {
         <Grid item xs={12}>
           <TextField
             required
-            fullWidth
             className={classes.textField}
             variant="outlined"
             id="full_name"
             label="Full Name"
             name="full_name"
             value={values.full_name}
-            onChange={handleChange("full_name")}
+            onChange={handleChange}
             margin="normal"
             InputProps={{
               startAdornment: (
