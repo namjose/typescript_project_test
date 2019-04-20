@@ -27,7 +27,6 @@ const styles = (theme: Theme) =>
       textAlign: "center",
     },
     signup_discount: {
-      marginTop: 50,
       padding: "24px 24px",
       backgroundColor: "#b5b5b5",
     },

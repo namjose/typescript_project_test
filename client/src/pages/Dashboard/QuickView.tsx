@@ -179,7 +179,7 @@ class QuickView extends React.Component<Props, State> {
               className={classes.formStyle}
             >
               <Grid item justify="flex-end" className={classes.buttonX}>
-                <IconButton className={classes.buttonX} onClick={popUp_view}>
+                <IconButton style={{ padding: "0px" }} onClick={popUp_view}>
                   <Icon
                     className={classNames(classes.iconX, "fas fa-times")}
                     style={{ color: "#808080" }}
