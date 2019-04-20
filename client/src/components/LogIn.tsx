@@ -19,6 +19,11 @@ import { AccountCircle, Visibility, VisibilityOff } from "@material-ui/icons";
 
 const styles = (theme: Theme) =>
   createStyles({
+    card__header: {
+      backgroundImage:
+        "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
+      padding: "5px",
+    },
     root: {
       display: "inline-block",
       // flexWrap: 'wrap',
@@ -27,11 +32,6 @@ const styles = (theme: Theme) =>
       flexDirection: "column",
       alignContent: "center",
       justifyContent: "center",
-    },
-    button: {
-      margin: theme.spacing.unit,
-      padding: "5px 5px",
-      fontWeight: "bold",
     },
     textField: {
       marginRight: theme.spacing.unit,
@@ -76,9 +76,11 @@ class LogIn extends React.Component<Props, State> {
     return (
       <main className={classes.root}>
         <Card className={classes.card}>
-          <Typography variant="h5" color="primary" align="center">
-            Log In
-          </Typography>
+          <Grid className={classes.card__header}>
+            <Typography variant="h6" color="secondary" align="center">
+              LOG IN
+            </Typography>
+          </Grid>
           <CardContent>
             <Grid container spacing={16}>
               <Grid item xs={12}>
@@ -132,12 +134,10 @@ class LogIn extends React.Component<Props, State> {
                 />
               </Grid>
               <Grid item container justify="center" xs={12}>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  className={classes.button}
-                >
-                  LOG IN
+                <Button variant="contained" color="primary">
+                  <Typography variant="button" color="secondary">
+                    LOG IN
+                  </Typography>
                 </Button>
               </Grid>
             </Grid>

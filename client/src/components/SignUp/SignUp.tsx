@@ -19,6 +19,11 @@ import AddressForm from "./AddressForm";
 
 const styles = (theme: Theme) =>
   createStyles({
+    card__header: {
+      backgroundImage:
+        "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
+      padding: "5px",
+    },
     root: {
       display: "inline-block",
       flexGrow: 1,
@@ -31,11 +36,6 @@ const styles = (theme: Theme) =>
       // marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
       width: "100%",
-    },
-    button: {
-      margin: theme.spacing.unit,
-      padding: "5px 5px",
-      fontWeight: "bold",
     },
   });
 
@@ -209,9 +209,11 @@ class SignUp extends React.Component<Props, State> {
     return (
       <main className={classes.root}>
         <Card className={classes.card}>
-          <Typography variant="h5" color="primary" align="center">
-            Sign up
-          </Typography>
+          <Grid className={classes.card__header}>
+            <Typography variant="h6" color="secondary" align="center">
+              SIGN UP
+            </Typography>
+          </Grid>
           <CardContent>
             <Stepper nonLinear activeStep={step}>
               {stepName.map((label: string, index: number) =>
@@ -223,31 +225,34 @@ class SignUp extends React.Component<Props, State> {
               <Grid item container justify="center" xs={12}>
                 {step !== 0 ? (
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     color="primary"
                     onClick={this.prevStep}
-                    className={classes.button}
                   >
-                    BACK
+                    <Typography variant="button" color="secondary">
+                      BACK
+                    </Typography>
                   </Button>
                 ) : null}
                 {step === this.state.totalStep ? (
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     color="primary"
                     onClick={this.handleSubmit}
-                    className={classes.button}
                   >
-                    SUBMIT
+                    <Typography variant="button" color="secondary">
+                      SUBMIT
+                    </Typography>
                   </Button>
                 ) : (
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     color="primary"
                     onClick={this.nextStep}
-                    className={classes.button}
                   >
-                    NEXT
+                    <Typography variant="button" color="secondary">
+                      NEXT
+                    </Typography>
                   </Button>
                 )}
               </Grid>

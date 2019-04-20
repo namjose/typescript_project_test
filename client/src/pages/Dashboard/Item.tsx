@@ -9,6 +9,7 @@ import {
   WithStyles,
 } from "@material-ui/core";
 import QuickView from "./QuickView";
+import ItemStructure from "./ItemStructure";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -17,22 +18,27 @@ const styles = (theme: Theme) =>
       fontWeight: "bold",
     },
     button_quickView: {
-      marginTop: -50,
+      marginTop: -57,
       background: "rgba(0, 0, 0, 0.5)",
       position: "relative",
+      margin: "0px",
+      borderRadius: 5,
     },
     title_button: {
       fontWeight: "bold",
       color: "#fff",
     },
+    price_box: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "flex-start",
+    },
   });
 
 interface Props extends WithStyles<typeof styles> {
   keyItem: number;
+  item: ItemStructure;
   itemName: string;
-  //   itemPrice: number;
-  //   itemGender: string;
-  //   itemType: string;
 }
 
 interface State {
@@ -63,16 +69,19 @@ class Item extends React.Component<Props, State> {
   };
 
   render() {
-    const { classes, keyItem, itemName } = this.props;
-    const data = { keyItem, itemName };
+    const { classes, keyItem, itemName, item } = this.props;
+    const { name, color, brand, gender, price, discount } = item;
+    const price_discount = price * discount;
     const { isHovered, isHidden } = this.state;
     return (
-      <Grid key={keyItem} item xs={3}>
+      <Grid key={keyItem} item xs={12} sm={6} md={3}>
         <div
           style={{
             height: 300,
-            backgroundColor: "#fafafa",
+            backgroundImage:
+              "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
             paddingTop: 5,
+            borderRadius: 5,
           }}
           onMouseEnter={this.handleHover}
           onMouseLeave={this.handleHover}
@@ -96,15 +105,42 @@ class Item extends React.Component<Props, State> {
           ) : null}
         </div>
         <div>
-          <Typography align="left" variant="body1" className={classes.title}>
-            {itemName} <br />
-            {/* {itemPrice} <br />
-            {itemGender} <br />
-            {itemType} <br /> */}
+          <Typography align="left" variant="h5" className={classes.title}>
+            {name} - {brand.toUpperCase()}
           </Typography>
+          <Typography
+            align="left"
+            variant="body1"
+            className={classes.title}
+            style={{ color: "#b5b5b5" }}
+          >
+            {gender === "male" ? "Mens" : "Womens"}
+          </Typography>
+          <div className={classes.price_box}>
+            <div>
+              <Typography
+                variant="h6"
+                className={classes.title}
+                color="primary"
+                // style={{ color: "#e62e49" }}
+              >
+                ${price_discount}.00
+              </Typography>
+            </div>
+            <div style={{ marginLeft: 12 }}>
+              <Typography
+                variant="h6"
+                className={classes.title}
+                color="textSecondary"
+                style={{ textDecoration: "line-through" }}
+              >
+                ${price}.00
+              </Typography>
+            </div>
+          </div>
         </div>
         {isHidden ? null : (
-          <QuickView data={data} popUp_view={this.popUp_view} />
+          <QuickView key={keyItem} item={item} popUp_view={this.popUp_view} />
         )}
       </Grid>
     );

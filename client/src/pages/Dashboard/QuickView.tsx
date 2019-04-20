@@ -28,6 +28,7 @@ import {
   Collapse,
 } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
+import ItemStructure from "./ItemStructure";
 import classNames from "classnames";
 
 import {
@@ -53,10 +54,9 @@ const styles = (theme: Theme) =>
       left: 0,
       right: 0,
       whiteSpace: "nowrap",
-      // display: "none"
     },
     mainView: {
-      width: "90%",
+      width: "80%",
       height: "95%",
       position: "absolute",
       top: 0,
@@ -65,22 +65,31 @@ const styles = (theme: Theme) =>
       right: 0,
       margin: "auto",
       overflow: "auto",
-      verticalAlign: "middle",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    container3: {
+      display: "flex",
+      alignItems: "center",
+    },
+    formStyle: {
+      overflowY: "scroll",
+      height: 680,
       backgroundColor: "white",
-      display: "inline-block",
+      padding: "16px",
+      borderRadius: "0px 5px 5px 0px",
     },
     buttonX: {
-      position: "absolute",
-      top: 0,
-      right: 0,
+      display: "flex",
+      // justifyContent: "flex-end",
+      marginTop: -15,
+      marginRight: -15,
     },
     button: {
       //   margin: theme.spacing.unit,
       padding: "12px 24px",
       fontWeight: "bold",
-    },
-    formStyle: {
-      padding: "24px 24px",
     },
     title: {
       fontWeight: "bold",
@@ -91,11 +100,20 @@ const styles = (theme: Theme) =>
     icon: {
       margin: theme.spacing.unit * 2,
     },
+    iconX: {
+      fontSize: 20,
+    },
+    price_box: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "flex-start",
+    },
   });
 
 interface Props extends WithStyles<typeof styles> {
   popUp_view: any;
-  data: any;
+  item: ItemStructure;
+  key: number;
 }
 interface State {
   size: string;
@@ -133,41 +151,47 @@ class QuickView extends React.Component<Props, State> {
   };
 
   render() {
-    const { classes, popUp_view, data } = this.props;
+    const { classes, popUp_view, item, key } = this.props;
+    const { name, color, brand, gender, price, discount } = item;
+    const price_discount = price * discount;
     const { size, openD } = this.state;
-    // if (!isHidden) {
-    //   display = "block";
-    // }
     return (
-      <div key={data.keyItem} className={classes.root}>
+      <div key={key} className={classes.root}>
         <div className={classes.mainView}>
-          <Button className={classes.buttonX} onClick={popUp_view}>
-            <Typography variant="h6" className={classes.title}>
-              X
-            </Typography>
-          </Button>
-          <Grid container xs={12} spacing={16} className={classes.formStyle}>
-            <Grid item xs={6}>
+          <Grid container xs={12} className={classes.container3}>
+            <Grid item xs={12} md={6}>
               <div
                 style={{
-                  height: 600,
-                  backgroundColor: "#fafafa",
+                  height: 700,
+                  backgroundImage:
+                    "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
+                  paddingTop: 5,
+                  borderRadius: 5,
                 }}
               />
             </Grid>
             <Grid
               item
               direction="column"
-              xs={6}
+              xs={12}
+              md={6}
               spacing={16}
               className={classes.formStyle}
             >
+              <Grid item justify="flex-end" className={classes.buttonX}>
+                <IconButton className={classes.buttonX} onClick={popUp_view}>
+                  <Icon
+                    className={classNames(classes.iconX, "fas fa-times")}
+                    style={{ color: "#808080" }}
+                  />
+                </IconButton>
+              </Grid>
               <Grid item>
-                <Typography variant="h3" className={classes.title}>
-                  {data.itemName}
+                <Typography align="left" variant="h3" className={classes.title}>
+                  {name}
                 </Typography>
-                <Typography variant="h4" className={classes.title}>
-                  BLUE/WHITE
+                <Typography align="left" variant="h4" className={classes.title}>
+                  {item.color.toUpperCase()}
                 </Typography>
               </Grid>
               <Divider />
@@ -179,11 +203,35 @@ class QuickView extends React.Component<Props, State> {
                 >
                   #123456
                 </Typography>
-                <Typography align="left" variant="h5" className={classes.title}>
-                  $19.95
+                <div className={classes.price_box}>
+                  <div>
+                    <Typography
+                      variant="h4"
+                      className={classes.title}
+                      color="primary"
+                      // style={{ color: "#e62e49" }}
+                    >
+                      ${price_discount}.00
+                    </Typography>
+                  </div>
+                  <div style={{ marginLeft: 12 }}>
+                    <Typography
+                      variant="h6"
+                      className={classes.title}
+                      color="textSecondary"
+                      style={{ textDecoration: "line-through" }}
+                    >
+                      ${price}.00
+                    </Typography>
+                  </div>
+                </div>
+                <br />
+                <br />
+                {/* <Typography align="left" variant="h5" className={classes.title}>
+                  ${price}.00
                   <br />
                   <br />
-                </Typography>
+                </Typography> */}
                 <div style={{ display: "flex" }}>
                   <div>
                     <FormControl
@@ -225,7 +273,6 @@ class QuickView extends React.Component<Props, State> {
                     </Link>
                   </div>
                 </div>
-
                 <br />
               </Grid>
               <Divider />
@@ -238,12 +285,8 @@ class QuickView extends React.Component<Props, State> {
                     <StarBorder />
                   </IconButton>
                 </Typography>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  className={classes.button}
-                >
-                  <Typography className={classes.title} variant="h6">
+                <Button variant="contained" color="primary">
+                  <Typography variant="button" color="secondary">
                     ADD TO CART
                   </Typography>
                 </Button>

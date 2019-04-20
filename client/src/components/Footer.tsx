@@ -10,10 +10,14 @@ import {
   Grid,
   Typography,
   Button,
-  TextField,
   InputBase,
+  List,
+  IconButton,
+  Icon,
+  Divider,
+  Link,
 } from "@material-ui/core";
-import { grey } from "@material-ui/core/colors";
+import classNames from "classnames";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -25,7 +29,7 @@ const styles = (theme: Theme) =>
     signup_discount: {
       marginTop: 50,
       padding: "24px 24px",
-      backgroundColor: grey[200],
+      backgroundColor: "#b5b5b5",
     },
     footerText: {
       fontWeight: "bold",
@@ -50,6 +54,10 @@ const styles = (theme: Theme) =>
     typo: {
       fontWeight: "bold",
       color: theme.palette.primary.main,
+    },
+    icon: {
+      margin: "0px 15px",
+      cursor: "pointer",
     },
   });
 
@@ -99,8 +107,8 @@ function Footer(props: Props) {
       </Grid>
       <Grid container xs={12} className={classes.root}>
         <Grid item xs={2}>
-          <Typography variant="body1" className={classes.footerText}>
-            © DC CONNECT
+          <Typography variant="h6" className={classes.footerText}>
+            DC CONNECT
           </Typography>
         </Grid>
         <Grid item xs>
@@ -129,6 +137,56 @@ function Footer(props: Props) {
           <Typography variant="body1">FAQs</Typography>
           <Typography variant="body1">Shipping</Typography>
           <Typography variant="body1">Order Information</Typography>
+        </Grid>
+        <Grid item xs>
+          <Typography variant="body1" className={classes.footerText}>
+            PAYMENT
+          </Typography>
+          <br />
+          <Typography variant="body1">Payment Options</Typography>
+          <Typography variant="body1">Business Adress</Typography>
+          <Typography variant="body1">PAYLAL ...</Typography>
+        </Grid>
+      </Grid>
+      <Divider variant="middle" />
+      <Grid container xs={12} className={classes.root}>
+        <Grid item xs={2}>
+          <Typography variant="body1" className={classes.footerText}>
+            © DC Connect 2019
+          </Typography>
+        </Grid>
+        <Grid item xs>
+          <Typography>
+            <Link color="inherit">
+              <Icon
+                className={classNames(classes.icon, "fab fa-facebook-square")}
+              />
+            </Link>
+            <Link color="inherit">
+              <Icon
+                className={classNames(classes.icon, "fab fa-twitter-square")}
+              />
+            </Link>
+            <Link color="inherit">
+              <Icon
+                className={classNames(
+                  classes.icon,
+                  "fab fa-google-plus-square",
+                )}
+              />
+            </Link>
+            <Link color="inherit">
+              <Icon
+                className={classNames(classes.icon, "fab fa-pinterest-square")}
+              />
+            </Link>
+            <Link color="inherit">
+              <Icon className={classNames(classes.icon, "fas fa-at")} />
+            </Link>
+          </Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="body1">Payment Methods</Typography>
         </Grid>
       </Grid>
     </React.Fragment>

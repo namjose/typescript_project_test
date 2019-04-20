@@ -90,7 +90,7 @@ function SearchAppBar(props: Props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="inherit">
+      <AppBar position="static">
         <Toolbar>
           {/* <IconButton
             className={classes.menuButton}
@@ -99,24 +99,24 @@ function SearchAppBar(props: Props) {
           >
             <MenuIcon />
           </IconButton> */}
-          <Button href="/" color="primary">
-            <Typography className={classes.typo} variant="h4">
+          <Button href="/">
+            <Typography variant="h6" color="secondary">
               DC CONNECT
             </Typography>
           </Button>
-          <Button href="/" color="primary">
-            <Typography className={classes.typo} variant="h6">
-              Mens
+          <Button href="/shop">
+            <Typography variant="h6" color="secondary">
+              Men
             </Typography>
           </Button>
-          <Button href="/" color="primary">
-            <Typography className={classes.typo} variant="h6">
-              Womens
+          <Button href="/">
+            <Typography variant="h6" color="secondary">
+              Women
             </Typography>
           </Button>
-          <Button href="/" color="primary">
-            <Typography className={classes.typo} variant="h6">
-              Sales
+          <Button href="/">
+            <Typography variant="h6" color="secondary">
+              Sale
             </Typography>
           </Button>
           <div className={classes.grow} />
@@ -132,13 +132,14 @@ function SearchAppBar(props: Props) {
               }}
             />
           </div>
-          <Button href="/login" color="primary">
-            <Typography className={classes.typo} variant="h6">
+          <Button href="/login">
+            <Typography variant="h6" color="secondary">
               Login
             </Typography>
           </Button>
-          <Button href="/register" color="primary">
-            <Typography className={classes.typo} variant="h6">
+
+          <Button href="/register">
+            <Typography variant="h6" color="secondary">
               Register
             </Typography>
           </Button>
