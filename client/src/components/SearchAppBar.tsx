@@ -15,6 +15,7 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
+import CartDrawer from "./CartDrawer";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -143,6 +144,7 @@ function SearchAppBar(props: Props) {
               Register
             </Typography>
           </Button>
+          <CartDrawer />
         </Toolbar>
       </AppBar>
     </div>

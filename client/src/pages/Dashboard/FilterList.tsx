@@ -19,6 +19,7 @@ import {
 } from "@material-ui/core";
 import { ChangeEvent } from "react";
 import Radio from "@material-ui/core/Radio";
+import FilterInterface from "./FilterInterface";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -39,91 +40,26 @@ const styles = (theme: Theme) =>
   });
 
 interface Props extends WithStyles<typeof styles> {
-  filter_list: {
-    type: string;
-    label: string;
-    value: string;
-    checked: boolean;
-  }[];
-  handleCheckBox: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCheckBox: (
+    type: string,
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  filter: FilterInterface;
 }
 
-interface State {
-  selectedOption: string[];
-
-  // gender: object;
-  // brand: object;
-  color: any;
-}
-
-const color_array = [
-  {
-    label: "Red",
-    checked: false,
-    quantity: 50,
-  },
-  {
-    label: "Blue",
-    checked: false,
-    quantity: 10,
-  },
-  {
-    label: "Black",
-    checked: false,
-    quantity: 20,
-  },
-  {
-    label: "White",
-    checked: false,
-    quantity: 30,
-  },
-];
-
-const emptyString: string[] = [];
+interface State {}
 
 class FilterList extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
   }
 
-  state = {
-    selectedOption: emptyString,
-
-    color: color_array,
-  };
-
-  handleChange = (object_name: string) => (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    let name: any = e.target.name;
-
-    let tmp_object = this.state[object_name];
-    tmp_object[name] = !tmp_object[name];
-
-    this.setState({ [object_name]: tmp_object } as Pick<State, keyof State>);
-  };
-
-  handleCheck = (object_name: string) => (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    let { name }: any = e.target;
-
-    let tmp_object = this.state[object_name];
-
-    tmp_object
-      .filter((object: any) => object.label === name)
-      .map((object: any) => (object.checked = !object.checked));
-
-    this.setState({ [object_name]: tmp_object } as Pick<State, keyof State>);
-  };
+  state = {};
 
   render() {
-    const { classes, filter_list, handleCheckBox } = this.props;
-    const { handleChange, handleCheck } = this;
-    const { color, selectedOption } = this.state;
+    const { classes, handleCheckBox, filter } = this.props;
     return (
       <React.Fragment>
-        <List>
+        <List key="filter_bar">
           <ListItem>
             <ListItemText
               primary={
@@ -133,7 +69,88 @@ class FilterList extends React.Component<Props, State> {
               }
             />
           </ListItem>
+          <Divider variant="middle" />
           <List>
+            <ListItem>
+              <ListItemText>
+                <Typography variant="h6">Gender</Typography>
+              </ListItemText>
+            </ListItem>
+            {filter.gender.map((filter, index) => {
+              return (
+                <ListItem key={index} className={classes.list__item}>
+                  <ListItemText>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name={filter.key}
+                          value={filter.value}
+                          onChange={handleCheckBox("gender")}
+                          color="primary"
+                        />
+                      }
+                      label={filter.key.toUpperCase()}
+                    />
+                  </ListItemText>
+                </ListItem>
+              );
+            })}
+          </List>
+          <Divider variant="middle" />
+          <List>
+            <ListItem>
+              <ListItemText>
+                <Typography variant="h6">Brand</Typography>
+              </ListItemText>
+            </ListItem>
+            {filter.brand.map((filter, index) => {
+              return (
+                <ListItem key={index} className={classes.list__item}>
+                  <ListItemText>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name={filter.key}
+                          value={filter.value}
+                          onChange={handleCheckBox("brand")}
+                          color="primary"
+                        />
+                      }
+                      label={filter.key.toUpperCase()}
+                    />
+                  </ListItemText>
+                </ListItem>
+              );
+            })}
+          </List>
+          <Divider variant="middle" />
+          <List>
+            <ListItem>
+              <ListItemText>
+                <Typography variant="h6">Color</Typography>
+              </ListItemText>
+            </ListItem>
+            {filter.brand.map((filter, index) => {
+              return (
+                <ListItem key={index} className={classes.list__item}>
+                  <ListItemText>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name={filter.key}
+                          value={filter.value}
+                          onChange={handleCheckBox("color")}
+                          color="primary"
+                        />
+                      }
+                      label={filter.key.toUpperCase()}
+                    />
+                  </ListItemText>
+                </ListItem>
+              );
+            })}
+          </List>
+          {/* <List>
             <ListItem>
               <ListItemText
                 primary={<Typography variant="h6">Gender</Typography>}
@@ -160,68 +177,7 @@ class FilterList extends React.Component<Props, State> {
                   </ListItem>
                 );
               })}
-          </List>
-
-          <Divider variant="middle" />
-          <List>
-            <ListItem>
-              <ListItemText
-                primary={<Typography variant="h6">Brand</Typography>}
-              />
-            </ListItem>
-            {filter_list
-              .filter(check_object => check_object.type === "Brand")
-              .map((check_object, index) => {
-                return (
-                  <ListItem key={index} className={classes.list__item}>
-                    <ListItemText>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            name={check_object.value}
-                            checked={check_object.checked}
-                            onChange={handleCheckBox}
-                            color="primary"
-                          />
-                        }
-                        label={check_object.label}
-                      />
-                    </ListItemText>
-                  </ListItem>
-                );
-              })}
-          </List>
-
-          {/* <Divider variant="middle" />
-          <List>
-            <ListItem>
-              <ListItemText
-                primary={<Typography variant="h6">Color</Typography>}
-              />
-            </ListItem>
-            {color.map((object, index) => {
-              return (
-                <ListItem key={index} className={classes.list__item}>
-                  <ListItemText>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          name={object.label}
-                          checked={object.checked}
-                          onChange={handleCheck("color")}
-                          color="primary"
-                        />
-                      }
-                      label={object.label}
-                    />
-                  </ListItemText>
-                  <Typography color="textSecondary">
-                    ({object.quantity})
-                  </Typography>
-                </ListItem>
-              );
-            })}
-          </List> */}
+              </List> */}
         </List>
       </React.Fragment>
     );

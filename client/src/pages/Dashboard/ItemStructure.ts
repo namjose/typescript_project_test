@@ -1,4 +1,5 @@
 interface ItemStructure {
+  id: number;
   name: string;
   color: string;
   brand: string;

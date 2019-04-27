@@ -14,7 +14,6 @@ import ItemStructure from "./ItemStructure";
 const styles = (theme: Theme) =>
   createStyles({
     title: {
-      // color: theme.palette.secondary.main,
       fontWeight: "bold",
     },
     button_quickView: {
@@ -73,13 +72,25 @@ class Item extends React.Component<Props, State> {
     const { name, color, brand, gender, price, discount } = item;
     const price_discount = price * discount;
     const { isHovered, isHidden } = this.state;
+    let keyPic = 0;
+    if (brand.indexOf("nike") > -1) {
+      keyPic = 3;
+    } else if (brand.indexOf("adidas") > -1) {
+      keyPic = (keyItem % 2) + 1;
+    } else {
+      keyPic = 4;
+    }
     return (
       <Grid key={keyItem} item xs={12} sm={6} md={3}>
         <div
           style={{
             height: 300,
-            backgroundImage:
-              "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
+            backgroundImage: `url(${
+              process.env.PUBLIC_URL
+            }/sneaker${keyPic}.png), linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
             paddingTop: 5,
             borderRadius: 5,
           }}
@@ -140,7 +151,12 @@ class Item extends React.Component<Props, State> {
           </div>
         </div>
         {isHidden ? null : (
-          <QuickView key={keyItem} item={item} popUp_view={this.popUp_view} />
+          <QuickView
+            key={keyItem}
+            keyPic={keyPic}
+            item={item}
+            popUp_view={this.popUp_view}
+          />
         )}
       </Grid>
     );

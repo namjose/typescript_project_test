@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import {
   createStyles,
   Theme,
@@ -74,7 +73,7 @@ const styles = (theme: Theme) =>
       alignItems: "center",
     },
     formStyle: {
-      overflowY: "scroll",
+      // overflowY: "scroll",
       height: 680,
       backgroundColor: "white",
       padding: "16px",
@@ -108,12 +107,21 @@ const styles = (theme: Theme) =>
       flexDirection: "row",
       justifyContent: "flex-start",
     },
+    description: {
+      height: 80,
+      fontStyle: "italic",
+    },
+    list__item: {
+      paddingTop: "0px",
+      paddingBottom: "0px",
+    },
   });
 
 interface Props extends WithStyles<typeof styles> {
   popUp_view: any;
   item: ItemStructure;
   key: number;
+  keyPic: number;
 }
 interface State {
   size: string;
@@ -151,7 +159,7 @@ class QuickView extends React.Component<Props, State> {
   };
 
   render() {
-    const { classes, popUp_view, item, key } = this.props;
+    const { classes, popUp_view, item, key, keyPic } = this.props;
     const { name, color, brand, gender, price, discount } = item;
     const price_discount = price * discount;
     const { size, openD } = this.state;
@@ -163,8 +171,14 @@ class QuickView extends React.Component<Props, State> {
               <div
                 style={{
                   height: 700,
-                  backgroundImage:
-                    "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
+                  backgroundImage: `url(${
+                    process.env.PUBLIC_URL
+                  }/sneaker${keyPic}.png), linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  // backgroundImage:
+                  //   "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
                   paddingTop: 5,
                   borderRadius: 5,
                 }}
@@ -201,7 +215,7 @@ class QuickView extends React.Component<Props, State> {
                   variant="body1"
                   className={classes.title}
                 >
-                  #123456
+                  EG7596
                 </Typography>
                 <div className={classes.price_box}>
                   <div>
@@ -227,11 +241,6 @@ class QuickView extends React.Component<Props, State> {
                 </div>
                 <br />
                 <br />
-                {/* <Typography align="left" variant="h5" className={classes.title}>
-                  ${price}.00
-                  <br />
-                  <br />
-                </Typography> */}
                 <div style={{ display: "flex" }}>
                   <div>
                     <FormControl
@@ -294,6 +303,16 @@ class QuickView extends React.Component<Props, State> {
               <br />
               <Divider />
               <Grid item>
+                <Typography
+                  variant="h6"
+                  align="left"
+                  className={classes.description}
+                >
+                  Description
+                </Typography>
+              </Grid>
+              {/* <Divider />
+              <Grid item>
                 <List>
                   <ListItem>
                     <ListItemAvatar>
@@ -338,15 +357,21 @@ class QuickView extends React.Component<Props, State> {
                     </List>
                   </Collapse>
                 </List>
-              </Grid>
-
+              </Grid> */}
+              <br />
               <Divider />
               <Grid item>
                 <List>
-                  <ListItem>
+                  <ListItem className={classes.list__item}>
                     <ListItemAvatar>
-                      <Avatar>
-                        <LocalShippingOutlined />
+                      <Avatar style={{ backgroundColor: "#ff8096" }}>
+                        <Icon
+                          className={classNames(
+                            classes.icon,
+                            "fas fa-share-alt",
+                          )}
+                          color="secondary"
+                        />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary="Share" />

@@ -1,14 +1,7 @@
 interface FilterInterface {
-  gender: {
-    male: boolean;
-    female: boolean;
-  };
-  brand: {
-    adidas: boolean;
-    nike: boolean;
-    puma: boolean;
-    vans: boolean;
-  };
+  gender: { key: string; value: boolean }[];
+  brand: { key: string; value: boolean }[];
+  color: { key: string; value: boolean }[];
 }
 
 export default FilterInterface;

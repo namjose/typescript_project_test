@@ -15,22 +15,23 @@ import SearchIcon from "@material-ui/icons/Search";
 import { grey } from "@material-ui/core/colors";
 import FilterList from "./FilterList";
 import Item from "./Item";
-
+import FilterInterface from "./FilterInterface";
 import ItemStructure from "./ItemStructure";
+import FlatPagination from "./FlatPagination";
 import item_list from "./DataList";
 
 const styles = (theme: Theme) =>
   createStyles({
-    hompage__background: {},
+    hompage__background: {
+      padding: "50px",
+    },
     header1: {
       backgroundColor: "red",
     },
     header2: {
       backgroundColor: grey[200],
     },
-    mainView: {
-      marginTop: 50,
-    },
+    mainView: {},
     gridList: {
       width: "100%",
     },
@@ -51,233 +52,238 @@ const styles = (theme: Theme) =>
     },
   });
 
+const filter: FilterInterface = {
+  gender: [{ key: "male", value: false }, { key: "female", value: false }],
+
+  //unused
+  brand: [
+    { key: "adidas", value: false },
+    { key: "nike", value: false },
+    { key: "puma", value: false },
+  ],
+  color: [
+    { key: "red", value: false },
+    { key: "blue", value: false },
+    { key: "black", value: false },
+    { key: "white", value: false },
+  ],
+};
+
 interface Props extends WithStyles<typeof styles> {}
 
 interface State {
   user: string;
-  search: string;
+  // search: string;
   sort: number;
   list_products: ItemStructure[];
-  filter_list: {
-    type: string;
-    label: string;
-    value: string;
-    checked: boolean;
-  }[];
+  filter: FilterInterface;
+  update_list: ItemStructure[];
+  offset: number;
+  limit: number;
+  total: number;
 }
-
-const filter_list: {
-  type: string;
-  label: string;
-  value: string;
-  checked: boolean;
-}[] = [
-  {
-    type: "Gender",
-    label: "Male",
-    value: "male",
-    checked: false,
-  },
-  {
-    type: "Gender",
-    label: "Female",
-    value: "female",
-    checked: false,
-  },
-  //brand
-  {
-    type: "Brand",
-    label: "Adidas",
-    value: "adidas",
-    checked: false,
-  },
-  {
-    type: "Brand",
-    label: "Nike",
-    value: "nike",
-    checked: false,
-  },
-  {
-    type: "Brand",
-    label: "Puma",
-    value: "puma",
-    checked: false,
-  },
-  {
-    type: "Brand",
-    label: "Vans",
-    value: "vans",
-    checked: false,
-  },
-];
 
 class Index extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
       user: "namjose",
-      search: "",
+      // search: "",
       sort: 0,
-      list_products: item_list,
-      filter_list: filter_list,
+      list_products: [], //original
+      filter: filter,
+      update_list: [],
+      offset: 0,
+      limit: 8,
+      total: 0,
     };
+
+    this.handleCheck = this.handleCheck.bind(this);
+    this.updateList = this.updateList.bind(this);
   }
 
-  filterList = () => {
-    let tmp_data_list: ItemStructure[] = [];
-    const checked_filter: {
-      type: string;
-      label: string;
-      value: string;
-      checked: boolean;
-    }[] = [];
-    this.state.filter_list
-      .filter(object => object.checked)
-      .map(filter_object => {
-        checked_filter.push(filter_object);
-      });
+  componentDidMount() {
+    this.setState({ list_products: item_list });
+    this.setState({ update_list: item_list });
+    this.setState({ total: item_list.length });
+  }
 
-    checked_filter
-      .filter(object => object.type === "Gender")
-      .map(filter => {
-        tmp_data_list.push(
-          ...item_list.filter(object => object.gender === filter.value),
-        );
-      });
-
-    const nested_filter = checked_filter.filter(
-      object => object.type === "Brand",
-    );
-
-    if (nested_filter.length !== 0) {
-      let adapt_list = item_list;
-      if (
-        checked_filter.filter(object => object.type === "Gender").length !== 0
-      ) {
-        adapt_list = tmp_data_list;
-        tmp_data_list = [];
-      }
-
-      nested_filter.map(filter => {
-        tmp_data_list.push(
-          ...adapt_list.filter(object => object.brand === filter.value),
-        );
-      });
-    }
-
-    filter_list.filter(object => object.checked).length === 0
-      ? this.setState({ list_products: item_list })
-      : this.setState({ list_products: tmp_data_list });
+  updateList = async (newList: ItemStructure[]) => {
+    await this.setState({ update_list: newList });
+    await this.setState({ total: this.state.update_list.length });
   };
 
-  handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let { name }: any = e.target;
-    let tmp_object = this.state.filter_list;
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let { name, value }: any = e.target;
+    this.setState({ [name]: value } as Pick<State, keyof State>);
+  };
+
+  filterList = () => {
+    let newList: ItemStructure[] = [];
+    let currentList = item_list; //parent list
+
+    const { filter } = this.state;
+
+    filter.gender
+      .filter(filter => filter.value)
+      .map(filter => {
+        const { key } = filter;
+        newList.push(...currentList.filter(item => item.gender === key));
+      });
+
+    if (newList.length === 0) {
+      newList = currentList;
+    }
+
+    this.setState({ list_products: newList });
+    this.updateList(newList);
+    this.sortList(this.state.sort);
+
+    // let gender_list = item_list;
+
+    // if (tmp_data_list.length !== 0) {
+    //   gender_list = tmp_data_list;
+    //   tmp_data_list = [];
+    // }
+
+    // filter.brand
+    //   .filter(filter => filter.value)
+    //   .map(filter => {
+    //     const { key } = filter;
+    //     tmp_data_list.push(...gender_list.filter(item => item.brand === key));
+    //   });
+
+    // if (filter.brand.filter(filter => filter.value).length !== 0) {
+    //   this.setState({ list_products: tmp_data_list });
+    // } else {
+    //   this.setState({ list_products: gender_list });
+    // }
+  };
+
+  handleCheck = (type: string) => async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    let { name }: any = e.target; //male, female ...
+    let tmp_object = this.state.filter;
     //filter and check in state
-    tmp_object
-      .filter((object: any) => object.value === name)
-      .map((object: any) => (object.checked = !object.checked));
+    tmp_object[type]
+      .filter((filter: { key: string; value: boolean }) => filter.key === name)
+      .map(
+        (filter: { key: string; value: boolean }) =>
+          (filter.value = !filter.value),
+      );
+    await this.setState({ filter: tmp_object } as Pick<State, keyof State>);
+    await this.filterList();
+  };
 
-    this.setState({ filter_list: tmp_object } as Pick<State, keyof State>);
+  searchListChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let { value }: any = e.target;
+    value = value.trim();
+    this.searchList(value);
+  };
 
-    this.filterList();
+  searchList = (search: string) => {
+    let currentList: ItemStructure[] = [];
+    let newList: ItemStructure[] = [];
+
+    if (search !== "") {
+      currentList = this.state.list_products;
+      newList = currentList.filter(
+        item => item.name.indexOf(search.toUpperCase()) > -1,
+      );
+    } else {
+      newList = this.state.list_products;
+    }
+    this.updateList(newList);
   };
 
   handleSortChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { name, value }: any = e.target;
     this.setState({ [name]: value } as Pick<State, keyof State>);
-
-    if (value !== 0) {
-      this.sortList(value);
-    } else {
-      this.setState({ list_products: item_list });
-    }
-  };
-
-  handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let { name, value }: any = e.target;
-    this.setState({ [name]: value } as Pick<State, keyof State>);
-
-    if (value.trim() !== "") {
-      this.filterSearch(value.trim());
-    } else {
-      this.setState({ list_products: item_list });
-    }
-  };
-
-  filterSearch = (search: string) => {
-    let tmp_data_list: ItemStructure[] = [];
-    tmp_data_list = item_list.filter(
-      item => item.name.indexOf(search.toUpperCase()) > -1,
-    );
-    this.setState({ list_products: tmp_data_list });
+    this.sortList(value);
   };
 
   sortList(sort: number) {
-    let tmp_data_list: ItemStructure[] = [];
+    let newList: ItemStructure[] = [];
+    const { update_list } = this.state;
+    newList = update_list;
+
     switch (sort) {
+      case 0:
+        newList.sort((a, b) => {
+          return a.id - b.id;
+        });
+        break;
       case 1:
-        tmp_data_list = item_list.sort((a, b) => {
+        newList.sort((a, b) => {
           if (a.name > b.name) return 1;
           else if (a.name < b.name) return -1;
           else return 0;
         });
         break;
-
       case 2:
-        tmp_data_list = item_list.sort((a, b) => {
+        newList.sort((a, b) => {
           if (a.name > b.name) return -1;
-          else if (a.name < b.name) return -1;
+          else if (a.name < b.name) return 1;
           else return 0;
         });
         break;
-
       case 3:
-        tmp_data_list = item_list.sort((a, b) => {
-          if (a.price > b.price) return -1;
+        newList.sort((a, b) => {
+          if (a.price > b.price) return 1;
           else if (a.price < b.price) return -1;
           else return 0;
         });
         break;
-
       case 4:
-        tmp_data_list = item_list.sort((a, b) => {
+        newList.sort((a, b) => {
           if (a.price > b.price) return -1;
-          else if (a.price < b.price) return -1;
+          else if (a.price < b.price) return 1;
           else return 0;
         });
         break;
-
       default:
-        tmp_data_list = [];
     }
 
-    this.setState({ list_products: tmp_data_list });
+    this.setState({ update_list: newList });
   }
 
+  handleClick = (e: React.MouseEvent, offset: number) => {
+    console.log(offset);
+    this.setState({ offset });
+  };
+
   render() {
-    const { handleSearchChange, handleSortChange } = this;
-    const { user, list_products, filter_list, search, sort } = this.state;
+    const { searchListChange, handleSortChange, handleClick } = this;
+    const {
+      user,
+      sort,
+      filter,
+      update_list,
+      offset,
+      limit,
+      total,
+    } = this.state;
     const { classes } = this.props;
     return (
       <main>
         <Grid container className={classes.hompage__background}>
           <Grid container xs={12} className={classes.mainView}>
             <Grid item xs={2}>
-              <FilterList
-                handleCheckBox={this.handleCheck}
-                filter_list={filter_list}
-              />
+              <FilterList handleCheckBox={this.handleCheck} filter={filter} />
             </Grid>
             <Grid container item xs={10} spacing={16}>
-              <Grid item xs={12} style={{ textAlign: "left" }}>
+              <Grid
+                item
+                xs={12}
+                style={{ textAlign: "right", height: "100px" }}
+              >
                 <div>
                   <TextField
                     fullWidth
                     name="search"
-                    value={search}
                     placeholder="Search item name here..."
-                    onChange={handleSearchChange}
+                    onChange={searchListChange}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -308,11 +314,29 @@ class Index extends React.Component<Props, State> {
                   </TextField>
                 </div>
               </Grid>
-              {list_products.map((item, index) => {
-                return (
-                  <Item keyItem={index} itemName={item.name} item={item} />
-                );
-              })}
+              {update_list.length === 0 ? (
+                <Grid item xs={12}>
+                  <Typography variant="h6">No item found</Typography>
+                </Grid>
+              ) : (
+                update_list
+                  .filter(
+                    (item, index) => index >= offset && index < offset + limit,
+                  )
+                  .map((item, index) => {
+                    return (
+                      <Item keyItem={index} itemName={item.name} item={item} />
+                    );
+                  })
+              )}
+              <Grid item xs={12} style={{ textAlign: "right" }}>
+                <FlatPagination
+                  offset={offset}
+                  limit={limit}
+                  total={total}
+                  handleClick={handleClick}
+                />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
