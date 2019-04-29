@@ -10,7 +10,7 @@ import {
   Theme,
   Typography,
   withStyles,
-  WithStyles,
+  WithStyles
 } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import TextField from "@material-ui/core/TextField";
@@ -22,7 +22,7 @@ const styles = (theme: Theme) =>
     card__header: {
       backgroundImage:
         "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
-      padding: "5px",
+      padding: "5px"
     },
     root: {
       display: "inline-block",
@@ -31,15 +31,15 @@ const styles = (theme: Theme) =>
       margin: "50px",
       flexDirection: "column",
       alignContent: "center",
-      justifyContent: "center",
+      justifyContent: "center"
     },
     textField: {
       marginRight: theme.spacing.unit,
-      width: "50%",
+      width: "50%"
     },
     card: {
-      width: 500,
-    },
+      width: 500
+    }
   });
 
 interface Props extends WithStyles<typeof styles> {}
@@ -56,7 +56,7 @@ class LogIn extends React.Component<Props, State> {
     this.state = {
       username: "",
       password: "",
-      showPassword: false,
+      showPassword: false
     };
   }
 
@@ -99,7 +99,7 @@ class LogIn extends React.Component<Props, State> {
                       <InputAdornment position="start">
                         <AccountCircle />
                       </InputAdornment>
-                    ),
+                    )
                   }}
                 />
               </Grid>
@@ -129,7 +129,7 @@ class LogIn extends React.Component<Props, State> {
                           )}
                         </IconButton>
                       </InputAdornment>
-                    ),
+                    )
                   }}
                 />
               </Grid>

@@ -4,12 +4,12 @@ import { TextField, Grid } from "@material-ui/core";
 interface Props {
   handleChange: any;
   values: any;
-    classes: any;
+  classes: any;
 }
 
 class AddressForm extends React.Component<Props> {
   render() {
-    const { values, handleChange, classes} = this.props;
+    const { values, handleChange, classes } = this.props;
     return (
       <React.Fragment>
         <Grid item xs={3}>

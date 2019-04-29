@@ -7,7 +7,7 @@ import {
   Theme,
   Button,
   withStyles,
-  WithStyles,
+  WithStyles
 } from "@material-ui/core";
 
 const styles = (theme: Theme) =>
@@ -15,7 +15,7 @@ const styles = (theme: Theme) =>
     hompage__background: { padding: "50px" },
     image: {
       backgroundImage:
-        "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
+        "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)"
     },
     img__shopNow: {
       display: "flex",
@@ -24,8 +24,8 @@ const styles = (theme: Theme) =>
       width: "100%",
       height: 660,
       backgroundImage:
-        "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
-    },
+        "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)"
+    }
   });
 
 interface Props extends WithStyles<typeof styles> {}

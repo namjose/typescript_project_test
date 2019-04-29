@@ -15,30 +15,30 @@ import {
   Divider,
   List,
   Button,
-  Icon,
+  Icon
 } from "@material-ui/core";
 
 const styles = (theme: Theme) =>
   createStyles({
     header: {
       backgroundImage:
-        "linear-gradient(to left bottom, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
+        "linear-gradient(to left bottom, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)"
     },
     list: {
-      width: 300,
+      width: 300
     },
     fullList: {
-      width: "auto",
+      width: "auto"
     },
     icon: {
-      margin: theme.spacing.unit * 2,
+      margin: theme.spacing.unit * 2
     },
     title: {
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     button: {
-      width: 280,
-    },
+      width: 280
+    }
   });
 
 interface Props extends WithStyles<typeof styles> {}
@@ -53,12 +53,12 @@ class CartDrawer extends React.Component<Props, State> {
   }
 
   state = {
-    right: false,
+    right: false
   };
 
   toggleDrawer = (e: React.MouseEvent) => {
     this.setState(prevState => ({
-      right: !prevState.right,
+      right: !prevState.right
     }));
   };
 

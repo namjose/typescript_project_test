@@ -15,7 +15,7 @@ import {
   ListItemText,
   Divider,
   Collapse,
-  Checkbox,
+  Checkbox
 } from "@material-ui/core";
 import { ChangeEvent } from "react";
 import Radio from "@material-ui/core/Radio";
@@ -25,23 +25,23 @@ const styles = (theme: Theme) =>
   createStyles({
     selected__box: {
       border: "1px solid black",
-      margin: "2px",
+      margin: "2px"
     },
     selected__text: {
-      padding: "5px 10px",
+      padding: "5px 10px"
     },
     list__item: {
       paddingTop: "0px",
-      paddingBottom: "0px",
+      paddingBottom: "0px"
     },
     title: {
-      fontWeight: "bold",
-    },
+      fontWeight: "bold"
+    }
   });
 
 interface Props extends WithStyles<typeof styles> {
   handleCheckBox: (
-    type: string,
+    type: string
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
   filter: FilterInterface;
 }

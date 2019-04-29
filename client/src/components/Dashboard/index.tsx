@@ -8,8 +8,7 @@ import {
   WithStyles,
   InputAdornment,
   TextField,
-  FormControl,
-  MenuItem,
+  MenuItem
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { grey } from "@material-ui/core/colors";
@@ -23,33 +22,33 @@ import item_list from "./DataList";
 const styles = (theme: Theme) =>
   createStyles({
     hompage__background: {
-      padding: "50px",
+      padding: "50px"
     },
     header1: {
-      backgroundColor: "red",
+      backgroundColor: "red"
     },
     header2: {
-      backgroundColor: grey[200],
+      backgroundColor: grey[200]
     },
     mainView: {},
     gridList: {
-      width: "100%",
+      width: "100%"
     },
     title: {
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     button_quickView: {
       marginTop: -50,
       background: "rgba(0, 0, 0, 0.5)",
-      position: "relative",
+      position: "relative"
     },
     title_button: {
       fontWeight: "bold",
-      color: "#fff",
+      color: "#fff"
     },
     menu: {
-      width: 200,
-    },
+      width: 200
+    }
   });
 
 const filter: FilterInterface = {
@@ -59,14 +58,14 @@ const filter: FilterInterface = {
   brand: [
     { key: "adidas", value: false },
     { key: "nike", value: false },
-    { key: "puma", value: false },
+    { key: "puma", value: false }
   ],
   color: [
     { key: "red", value: false },
     { key: "blue", value: false },
     { key: "black", value: false },
-    { key: "white", value: false },
-  ],
+    { key: "white", value: false }
+  ]
 };
 
 interface Props extends WithStyles<typeof styles> {}
@@ -95,7 +94,7 @@ class Index extends React.Component<Props, State> {
       update_list: [],
       offset: 0,
       limit: 8,
-      total: 0,
+      total: 0
     };
 
     this.handleCheck = this.handleCheck.bind(this);
@@ -161,7 +160,7 @@ class Index extends React.Component<Props, State> {
   };
 
   handleCheck = (type: string) => async (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     let { name }: any = e.target; //male, female ...
     let tmp_object = this.state.filter;
@@ -170,7 +169,7 @@ class Index extends React.Component<Props, State> {
       .filter((filter: { key: string; value: boolean }) => filter.key === name)
       .map(
         (filter: { key: string; value: boolean }) =>
-          (filter.value = !filter.value),
+          (filter.value = !filter.value)
       );
     await this.setState({ filter: tmp_object } as Pick<State, keyof State>);
     await this.filterList();
@@ -189,7 +188,7 @@ class Index extends React.Component<Props, State> {
     if (search !== "") {
       currentList = this.state.list_products;
       newList = currentList.filter(
-        item => item.name.indexOf(search.toUpperCase()) > -1,
+        item => item.name.indexOf(search.toUpperCase()) > -1
       );
     } else {
       newList = this.state.list_products;
@@ -262,7 +261,7 @@ class Index extends React.Component<Props, State> {
       update_list,
       offset,
       limit,
-      total,
+      total
     } = this.state;
     const { classes } = this.props;
     return (
@@ -289,7 +288,7 @@ class Index extends React.Component<Props, State> {
                         <InputAdornment position="start">
                           <SearchIcon style={{ color: "#b5b5b5" }} />
                         </InputAdornment>
-                      ),
+                      )
                     }}
                   />
                 </div>
@@ -301,8 +300,8 @@ class Index extends React.Component<Props, State> {
                     onChange={handleSortChange}
                     SelectProps={{
                       MenuProps: {
-                        className: classes.menu,
-                      },
+                        className: classes.menu
+                      }
                     }}
                     margin="normal"
                   >
@@ -321,7 +320,7 @@ class Index extends React.Component<Props, State> {
               ) : (
                 update_list
                   .filter(
-                    (item, index) => index >= offset && index < offset + limit,
+                    (item, index) => index >= offset && index < offset + limit
                   )
                   .map((item, index) => {
                     return (

@@ -15,7 +15,7 @@ interface State {
 
 class PersonalForm extends React.Component<Props, State> {
   state = {
-    showPassword: false,
+    showPassword: false
   };
 
   handleClickShowPassword = () => {
@@ -43,7 +43,7 @@ class PersonalForm extends React.Component<Props, State> {
                 <InputAdornment position="start">
                   <AccountCircle />
                 </InputAdornment>
-              ),
+              )
             }}
           />
         </Grid>
@@ -73,7 +73,7 @@ class PersonalForm extends React.Component<Props, State> {
                     )}
                   </IconButton>
                 </InputAdornment>
-              ),
+              )
             }}
           />
         </Grid>
@@ -93,7 +93,7 @@ class PersonalForm extends React.Component<Props, State> {
                 <InputAdornment position="start">
                   <Icon>email</Icon>
                 </InputAdornment>
-              ),
+              )
             }}
           />
         </Grid>
@@ -113,7 +113,7 @@ class PersonalForm extends React.Component<Props, State> {
                 <InputAdornment position="start">
                   <Icon>star</Icon>
                 </InputAdornment>
-              ),
+              )
             }}
           />
         </Grid>

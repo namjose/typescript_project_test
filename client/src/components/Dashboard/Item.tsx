@@ -6,32 +6,33 @@ import {
   Typography,
   Theme,
   withStyles,
-  WithStyles,
+  WithStyles
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import QuickView from "./QuickView";
 import ItemStructure from "./ItemStructure";
 
 const styles = (theme: Theme) =>
   createStyles({
     title: {
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     button_quickView: {
       marginTop: -57,
       background: "rgba(0, 0, 0, 0.5)",
       position: "relative",
       margin: "0px",
-      borderRadius: 5,
+      borderRadius: 5
     },
     title_button: {
       fontWeight: "bold",
-      color: "#fff",
+      color: "#fff"
     },
     price_box: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "flex-start",
-    },
+      justifyContent: "flex-start"
+    }
   });
 
 interface Props extends WithStyles<typeof styles> {
@@ -52,18 +53,18 @@ class Item extends React.Component<Props, State> {
 
   state = {
     isHovered: false,
-    isHidden: true,
+    isHidden: true
   };
 
   handleHover = (e: React.MouseEvent) => {
     this.setState(prevState => ({
-      isHovered: !prevState.isHovered,
+      isHovered: !prevState.isHovered
     }));
   };
 
   popUp_view = (e: React.MouseEvent) => {
     this.setState(prevState => ({
-      isHidden: !prevState.isHovered,
+      isHidden: !prevState.isHovered
     }));
   };
 
@@ -92,14 +93,14 @@ class Item extends React.Component<Props, State> {
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             paddingTop: 5,
-            borderRadius: 5,
+            borderRadius: 5
           }}
           onMouseEnter={this.handleHover}
           onMouseLeave={this.handleHover}
         >
           <div
             style={{
-              height: 300,
+              height: 300
             }}
           />
           {isHovered ? (
@@ -117,7 +118,9 @@ class Item extends React.Component<Props, State> {
         </div>
         <div>
           <Typography align="left" variant="h5" className={classes.title}>
-            {name} - {brand.toUpperCase()}
+            <Link to={`/details/${keyItem}`}>
+              {name} - {brand.toUpperCase()}
+            </Link>
           </Typography>
           <Typography
             align="left"

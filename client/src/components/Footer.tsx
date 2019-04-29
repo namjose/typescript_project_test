@@ -4,7 +4,7 @@ import {
   createStyles,
   Theme,
   withStyles,
-  WithStyles,
+  WithStyles
 } from "@material-ui/core/styles";
 import {
   Grid,
@@ -15,7 +15,7 @@ import {
   IconButton,
   Icon,
   Divider,
-  Link,
+  Link
 } from "@material-ui/core";
 import classNames from "classnames";
 
@@ -24,40 +24,40 @@ const styles = (theme: Theme) =>
     root: {
       width: "100%",
       padding: "24px 24px",
-      textAlign: "center",
+      textAlign: "center"
     },
     signup_discount: {
       padding: "24px 24px",
-      backgroundColor: "#b5b5b5",
+      backgroundColor: "#b5b5b5"
     },
     footerText: {
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     borderText: {
       border: "2px solid black",
       padding: "10px 10px",
       width: 200,
-      borderRadius: "4px",
+      borderRadius: "4px"
     },
     button: {
       margin: theme.spacing.unit,
       padding: "5px 5px",
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     inputBase: {
       backgroundColor: theme.palette.common.white,
       width: "300px",
       padding: "5px 5px",
-      borderRadius: "4px",
+      borderRadius: "4px"
     },
     typo: {
       fontWeight: "bold",
-      color: theme.palette.primary.main,
+      color: theme.palette.primary.main
     },
     icon: {
       margin: "0px 15px",
-      cursor: "pointer",
-    },
+      cursor: "pointer"
+    }
   });
 
 interface Props extends WithStyles<typeof styles> {}
@@ -170,7 +170,7 @@ function Footer(props: Props) {
               <Icon
                 className={classNames(
                   classes.icon,
-                  "fab fa-google-plus-square",
+                  "fab fa-google-plus-square"
                 )}
               />
             </Link>
@@ -193,7 +193,7 @@ function Footer(props: Props) {
 }
 
 Footer.propTypes = {
-  classes: PropTypes.object.isRequired, //mandatory prop
+  classes: PropTypes.object.isRequired //mandatory prop
 } as any;
 
 export default withStyles(styles)(Footer);

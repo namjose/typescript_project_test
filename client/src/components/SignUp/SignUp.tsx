@@ -11,7 +11,7 @@ import {
   Typography,
   withStyles,
   WithStyles,
-  Grid,
+  Grid
 } from "@material-ui/core";
 import PaymentForm from "./PaymentForm";
 import PersonalForm from "./PersonalForm";
@@ -22,21 +22,21 @@ const styles = (theme: Theme) =>
     card__header: {
       backgroundImage:
         "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
-      padding: "5px",
+      padding: "5px"
     },
     root: {
       display: "inline-block",
       flexGrow: 1,
-      margin: "50px",
+      margin: "50px"
     },
     card: {
-      width: 500,
+      width: 500
     },
     textField: {
       // marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
-      width: "100%",
-    },
+      width: "100%"
+    }
   });
 
 interface Props extends WithStyles<typeof styles> {}
@@ -75,7 +75,7 @@ class SignUp extends React.Component<Props, State> {
     street: "",
     suburb: "",
     state: "",
-    postcodes: "",
+    postcodes: ""
   };
 
   handleSubmit = (e: React.FormEvent) => {
@@ -91,7 +91,7 @@ class SignUp extends React.Component<Props, State> {
       street,
       suburb,
       state,
-      postcodes,
+      postcodes
     } = this.state;
     const values = {
       username,
@@ -105,7 +105,7 @@ class SignUp extends React.Component<Props, State> {
       street,
       suburb,
       state,
-      postcodes,
+      postcodes
     };
     console.log(values);
   };
@@ -114,7 +114,7 @@ class SignUp extends React.Component<Props, State> {
   nextStep = (e: React.MouseEvent) => {
     const { step } = this.state;
     this.setState({
-      step: step + 1,
+      step: step + 1
     });
   };
 
@@ -122,7 +122,7 @@ class SignUp extends React.Component<Props, State> {
   prevStep = (e: React.MouseEvent) => {
     const { step } = this.state;
     this.setState({
-      step: step - 1,
+      step: step - 1
     });
   };
 
@@ -190,7 +190,7 @@ class SignUp extends React.Component<Props, State> {
       street,
       suburb,
       state,
-      postcodes,
+      postcodes
     } = this.state;
     const values = {
       username,
@@ -204,7 +204,7 @@ class SignUp extends React.Component<Props, State> {
       street,
       suburb,
       state,
-      postcodes,
+      postcodes
     };
     return (
       <main className={classes.root}>
@@ -217,7 +217,7 @@ class SignUp extends React.Component<Props, State> {
           <CardContent>
             <Stepper nonLinear activeStep={step}>
               {stepName.map((label: string, index: number) =>
-                this.getStep(label, index),
+                this.getStep(label, index)
               )}
             </Stepper>
             <Grid container spacing={16}>

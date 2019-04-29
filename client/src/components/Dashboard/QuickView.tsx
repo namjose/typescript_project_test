@@ -24,7 +24,7 @@ import {
   ListItemSecondaryAction,
   Avatar,
   List,
-  Collapse,
+  Collapse
 } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 import ItemStructure from "./ItemStructure";
@@ -35,7 +35,7 @@ import {
   LocationOn,
   InfoOutlined,
   LocalShippingOutlined,
-  Share,
+  Share
 } from "@material-ui/icons";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
@@ -52,7 +52,7 @@ const styles = (theme: Theme) =>
       bottom: 0,
       left: 0,
       right: 0,
-      whiteSpace: "nowrap",
+      whiteSpace: "nowrap"
     },
     mainView: {
       width: "80%",
@@ -66,55 +66,55 @@ const styles = (theme: Theme) =>
       overflow: "auto",
       display: "flex",
       justifyContent: "center",
-      alignItems: "center",
+      alignItems: "center"
     },
     container3: {
       display: "flex",
-      alignItems: "center",
+      alignItems: "center"
     },
     formStyle: {
       // overflowY: "scroll",
       height: 680,
       backgroundColor: "white",
       padding: "16px",
-      borderRadius: "0px 5px 5px 0px",
+      borderRadius: "0px 5px 5px 0px"
     },
     buttonX: {
       display: "flex",
       // justifyContent: "flex-end",
       marginTop: -15,
-      marginRight: -15,
+      marginRight: -15
     },
     button: {
       //   margin: theme.spacing.unit,
       padding: "12px 24px",
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     title: {
-      fontWeight: "bold",
+      fontWeight: "bold"
     },
     formControl: {
-      width: 200,
+      width: 200
     },
     icon: {
-      margin: theme.spacing.unit * 2,
+      margin: theme.spacing.unit * 2
     },
     iconX: {
-      fontSize: 20,
+      fontSize: 20
     },
     price_box: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "flex-start",
+      justifyContent: "flex-start"
     },
     description: {
       height: 80,
-      fontStyle: "italic",
+      fontStyle: "italic"
     },
     list__item: {
       paddingTop: "0px",
-      paddingBottom: "0px",
-    },
+      paddingBottom: "0px"
+    }
   });
 
 interface Props extends WithStyles<typeof styles> {
@@ -138,7 +138,7 @@ class QuickView extends React.Component<Props, State> {
     size: "",
     labelWidth: 200,
     openD: false,
-    openS: false,
+    openS: false
   };
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -148,13 +148,13 @@ class QuickView extends React.Component<Props, State> {
 
   handleClickCollapse = (e: React.MouseEvent) => {
     this.setState(prevState => ({
-      openD: !prevState.openD,
+      openD: !prevState.openD
     }));
   };
 
   handleClickCollapse2 = (e: React.MouseEvent) => {
     this.setState(prevState => ({
-      openS: !prevState.openS,
+      openS: !prevState.openS
     }));
   };
 
@@ -180,7 +180,7 @@ class QuickView extends React.Component<Props, State> {
                   // backgroundImage:
                   //   "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
                   paddingTop: 5,
-                  borderRadius: 5,
+                  borderRadius: 5
                 }}
               />
             </Grid>
@@ -368,7 +368,7 @@ class QuickView extends React.Component<Props, State> {
                         <Icon
                           className={classNames(
                             classes.icon,
-                            "fas fa-share-alt",
+                            "fas fa-share-alt"
                           )}
                           color="secondary"
                         />
@@ -391,7 +391,7 @@ class QuickView extends React.Component<Props, State> {
                         <Icon
                           className={classNames(
                             classes.icon,
-                            "fab fa-facebook-square",
+                            "fab fa-facebook-square"
                           )}
                           color="primary"
                         />
@@ -400,7 +400,7 @@ class QuickView extends React.Component<Props, State> {
                         <Icon
                           className={classNames(
                             classes.icon,
-                            "fab fa-twitter-square",
+                            "fab fa-twitter-square"
                           )}
                           color="primary"
                         />
@@ -409,7 +409,7 @@ class QuickView extends React.Component<Props, State> {
                         <Icon
                           className={classNames(
                             classes.icon,
-                            "fab fa-google-plus-square",
+                            "fab fa-google-plus-square"
                           )}
                           color="primary"
                         />
@@ -418,7 +418,7 @@ class QuickView extends React.Component<Props, State> {
                         <Icon
                           className={classNames(
                             classes.icon,
-                            "fab fa-pinterest-square",
+                            "fab fa-pinterest-square"
                           )}
                           color="primary"
                         />
