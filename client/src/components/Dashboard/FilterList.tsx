@@ -17,8 +17,6 @@ import {
   Collapse,
   Checkbox
 } from "@material-ui/core";
-import { ChangeEvent } from "react";
-import Radio from "@material-ui/core/Radio";
 import FilterInterface from "./FilterInterface";
 
 const styles = (theme: Theme) =>

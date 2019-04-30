@@ -5,40 +5,29 @@ import {
   withStyles,
   WithStyles,
   Grid,
-  CardContent,
-  Card,
   Typography,
-  CardActions,
   Button,
   Divider,
   IconButton,
   InputLabel,
   FormControl,
-  MenuItem,
   Select,
   OutlinedInput,
   Link,
   ListItemText,
   ListItem,
   ListItemAvatar,
-  ListItemSecondaryAction,
   Avatar,
   List,
   Collapse
 } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
-import ItemStructure from "./ItemStructure";
 import classNames from "classnames";
-
-import {
-  StarBorder,
-  LocationOn,
-  InfoOutlined,
-  LocalShippingOutlined,
-  Share
-} from "@material-ui/icons";
+import { StarBorder, LocationOn, InfoOutlined } from "@material-ui/icons";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import addCart from "../../actionCreators/addCart";
+import { ItemStructure } from "../../types/types";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -73,7 +62,6 @@ const styles = (theme: Theme) =>
       alignItems: "center"
     },
     formStyle: {
-      // overflowY: "scroll",
       height: 680,
       backgroundColor: "white",
       padding: "16px",
@@ -81,12 +69,10 @@ const styles = (theme: Theme) =>
     },
     buttonX: {
       display: "flex",
-      // justifyContent: "flex-end",
       marginTop: -15,
       marginRight: -15
     },
     button: {
-      //   margin: theme.spacing.unit,
       padding: "12px 24px",
       fontWeight: "bold"
     },
@@ -122,6 +108,7 @@ interface Props extends WithStyles<typeof styles> {
   item: ItemStructure;
   key: number;
   keyPic: number;
+  handleAddCart: typeof addCart;
 }
 interface State {
   size: string;
@@ -158,8 +145,20 @@ class QuickView extends React.Component<Props, State> {
     }));
   };
 
+  handleClickAddButton = (e: React.MouseEvent) => {
+    this.props.popUp_view();
+    this.props.handleAddCart(this.props.item);
+  };
+
   render() {
-    const { classes, popUp_view, item, key, keyPic } = this.props;
+    const {
+      classes,
+      popUp_view,
+      item,
+      key,
+      keyPic,
+      handleAddCart
+    } = this.props;
     const { name, color, brand, gender, price, discount } = item;
     const price_discount = price * discount;
     const { size, openD } = this.state;
@@ -294,7 +293,11 @@ class QuickView extends React.Component<Props, State> {
                     <StarBorder />
                   </IconButton>
                 </Typography>
-                <Button variant="contained" color="primary">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleClickAddButton}
+                >
                   <Typography variant="button" color="secondary">
                     ADD TO CART
                   </Typography>

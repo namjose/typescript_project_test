@@ -12,7 +12,6 @@ import {
   withStyles,
   WithStyles
 } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
 import CartDrawer from "./CartDrawer";
@@ -151,8 +150,8 @@ function SearchAppBar(props: Props) {
   );
 }
 
-SearchAppBar.propTypes = {
-  classes: PropTypes.object.isRequired
-} as any;
+// SearchAppBar.propTypes = {
+//   classes: PropTypes.object.isRequired
+// } as any;
 
 export default withStyles(styles)(SearchAppBar);

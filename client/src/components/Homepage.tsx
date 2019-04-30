@@ -44,6 +44,7 @@ class Homepage extends React.Component<Props> {
         className={classes.hompage__background}
         xs={12}
         spacing={16}
+        style={{ margin: 0 }}
       >
         <Grid item xs={12}>
           <div className={classes.img__shopNow}>

@@ -4,7 +4,6 @@ import {
   createStyles,
   Grid,
   IconButton,
-  InputAdornment,
   Theme,
   Typography,
   withStyles,
@@ -15,9 +14,16 @@ import {
   Divider,
   List,
   Button,
-  Icon
+  Icon,
+  TextField,
+  ButtonBase
 } from "@material-ui/core";
-
+import { connect } from "react-redux";
+import { CartInterface } from "../types/types";
+import { AppState } from "../reducers/";
+import { Dispatch } from "redux";
+import deleteCart from "../actionCreators/deleteCart";
+import toggleCart from "../actionCreators/toggleCart";
 const styles = (theme: Theme) =>
   createStyles({
     header: {
@@ -30,79 +36,60 @@ const styles = (theme: Theme) =>
     fullList: {
       width: "auto"
     },
-    icon: {
-      margin: theme.spacing.unit * 2
-    },
     title: {
       fontWeight: "bold"
     },
     button: {
       width: 280
+    },
+    grid_box: {
+      paddingLeft: 20
+    },
+    quantity_textField: {
+      width: 80,
+      marginBottom: 0
+    },
+    remove_button: {
+      color: "red"
+    },
+    cart_icon: {
+      fontSize: 21,
+      margin: 0
+    },
+    sub_total_list: {
+      backgroundColor: "#f7f7f7"
     }
   });
 
-interface Props extends WithStyles<typeof styles> {}
-
-interface State {
-  right: boolean;
+interface Props extends WithStyles<typeof styles> {
+  cart: CartInterface;
+  handleDeleteCart: typeof deleteCart;
+  handleToggleCart: typeof toggleCart;
 }
 
-class CartDrawer extends React.Component<Props, State> {
+class CartDrawer extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
   }
 
-  state = {
-    right: false
-  };
-
-  toggleDrawer = (e: React.MouseEvent) => {
-    this.setState(prevState => ({
-      right: !prevState.right
-    }));
-  };
-
   render() {
-    const { classes } = this.props;
-    const sideList = (
-      <div className={classes.list}>
-        {/* <List className={classes.header}>
-          <ListItem button key={"Cart"}>
-            <ListItemText>
-              <Typography variant="h6" color="secondary">
-                Cart
-              </Typography>
-            </ListItemText>
-          </ListItem>
-        </List> */}
-        <Divider />
-        <List>
-          <ListItem button key={1}>
-            <ListItemText primary={"Ultraboost"} />
-          </ListItem>
-        </List>
-      </div>
-    );
+    const { classes, cart, handleToggleCart } = this.props;
+    const { showCartDrawer, purchasedItem, total } = cart;
     return (
       <React.Fragment>
-        <IconButton onClick={this.toggleDrawer}>
+        <IconButton onClick={handleToggleCart}>
           <Icon
-            className={classNames(classes.icon, "fas fa-shopping-cart")}
+            className={classNames(classes.cart_icon, "fas fa-shopping-cart")}
             color="secondary"
           />
         </IconButton>
         <SwipeableDrawer
           anchor="right"
-          open={this.state.right}
-          onClose={this.toggleDrawer}
-          onOpen={this.toggleDrawer}
+          open={showCartDrawer}
+          onClose={handleToggleCart}
+          onOpen={handleToggleCart}
         >
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer}
-            // onKeyDown={this.toggleDrawer}
-          >
+          <div tabIndex={0} role="button" onClick={handleToggleCart}>
             <div className={classes.list}>
               <List className={classes.header}>
                 <ListItem button key={"Cart"}>
@@ -118,57 +105,102 @@ class CartDrawer extends React.Component<Props, State> {
           <div className={classes.list}>
             <Divider />
             <List>
-              <ListItem key={1}>
-                <Grid container justify="space-evenly">
-                  <Grid item>
-                    <div
-                      style={{ height: 90, width: 50, backgroundColor: "pink" }}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <ListItemText>
-                      <Typography variant="h6" color="default">
-                        ULTRABOOST
-                      </Typography>
-                      <Typography variant="body1" color="default">
-                        8
-                      </Typography>
-                      <br />
-                      <Grid container justify="space-between">
-                        <Grid>
-                          <Typography variant="body1" color="default">
-                            Quantity
-                          </Typography>
+              {purchasedItem.map((item, index) => {
+                return (
+                  <ListItem key={index}>
+                    <Grid container justify="space-around">
+                      <Grid item xs={3}>
+                        <div
+                          style={{
+                            height: "100%",
+                            backgroundColor: "pink"
+                          }}
+                        />
+                      </Grid>
+                      <Grid item className={classes.grid_box} xs={9}>
+                        <Typography
+                          variant="body1"
+                          color="default"
+                          className={classes.title}
+                        >
+                          {item.name} {item.brand.toUpperCase()}{" "}
+                          {item.color.toUpperCase()}
+                        </Typography>
+                        <Grid
+                          container
+                          justify="space-between"
+                          style={{ marginTop: 8 }}
+                        >
+                          <Grid>
+                            <Typography variant="body1" color="default">
+                              8
+                            </Typography>
+                          </Grid>
+                          <Grid>
+                            <ButtonBase
+                              style={{ color: "red" }}
+                              onClick={() =>
+                                this.props.handleDeleteCart(item.id)
+                              }
+                            >
+                              X Remove
+                            </ButtonBase>
+                          </Grid>
                         </Grid>
-                        <Grid>
-                          <Typography variant="body1" color="default">
-                            $20.00
-                          </Typography>
+                        <Grid
+                          container
+                          justify="space-between"
+                          alignItems="center"
+                        >
+                          <Grid>
+                            <TextField
+                              className={classes.quantity_textField}
+                              id="outlined-number"
+                              label="Quantity"
+                              type="number"
+                              InputLabelProps={{
+                                shrink: true
+                              }}
+                              margin="normal"
+                              variant="outlined"
+                            />
+                          </Grid>
+                          <Grid>
+                            <Typography variant="body1" color="default">
+                              ${item.price * item.discount}.00
+                            </Typography>
+                          </Grid>
                         </Grid>
                       </Grid>
-                    </ListItemText>
-                  </Grid>
-                </Grid>
-              </ListItem>
+                    </Grid>
+                  </ListItem>
+                );
+              })}
             </List>
-            <Divider />
-            <List>
+            <List className={classes.sub_total_list}>
               <ListItem key={"Sub Total"}>
                 <Grid container justify="space-between">
                   <Grid>
-                    <Typography variant="body1" color="default">
+                    <Typography
+                      variant="body1"
+                      color="default"
+                      className={classes.title}
+                    >
                       Subtotal
                     </Typography>
                   </Grid>
                   <Grid>
-                    <Typography variant="body1" color="default">
-                      $20.00
+                    <Typography
+                      variant="body1"
+                      color="default"
+                      className={classes.title}
+                    >
+                      ${total}.00
                     </Typography>
                   </Grid>
                 </Grid>
               </ListItem>
             </List>
-            <Divider />
             <br />
             <Grid container direction="column" alignItems="center">
               <Button
@@ -181,11 +213,12 @@ class CartDrawer extends React.Component<Props, State> {
                 </Typography>
               </Button>
               <Button
-                variant="contained"
+                variant="outlined"
                 color="primary"
                 className={classes.button}
+                onClick={handleToggleCart}
               >
-                <Typography variant="button" color="secondary">
+                <Typography variant="button" color="primary">
                   CONTINUE SHOPPING
                 </Typography>
               </Button>
@@ -199,4 +232,22 @@ class CartDrawer extends React.Component<Props, State> {
   }
 }
 
-export default withStyles(styles)(CartDrawer);
+const mapStateToProps = (state: AppState) => ({
+  cart: state.cart
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  handleDeleteCart(itemId: string) {
+    dispatch(deleteCart(itemId));
+  },
+  handleToggleCart(newState: CartInterface) {
+    dispatch(toggleCart());
+  }
+});
+
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(CartDrawer)
+);

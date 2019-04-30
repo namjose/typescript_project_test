@@ -1,5 +1,6 @@
 import * as React from "react";
 import "./App.css";
+import { Provider } from "react-redux";
 import SearchAppBar from "./components/SearchAppBar";
 import Footer from "./components/Footer";
 import Dashboard from "./components/Dashboard";
@@ -7,9 +8,9 @@ import Detail from "./components/Detail";
 import LogIn from "./components/LogIn";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import { deepOrange, lightBlue, pink } from "@material-ui/core/colors";
 import SignUp from "./components/SignUp/SignUp";
 import Homepage from "./components/Homepage";
+import store from "./store";
 
 const theme = createMuiTheme({
   palette: {
@@ -48,21 +49,23 @@ const theme = createMuiTheme({
 class App extends React.Component {
   public render() {
     return (
-      <MuiThemeProvider theme={theme}>
-        <SearchAppBar />
-        <Router>
-          <div className="App">
-            <Switch>
-              <Route exact path="/" component={Homepage} />
-              <Route exact path="/shop" component={Dashboard} />
-              <Route path="/login" component={LogIn} />
-              <Route path="/register" component={SignUp} />
-              <Route path="/details/:id" component={Detail} />
-            </Switch>
-          </div>
-        </Router>
-        <Footer />
-      </MuiThemeProvider>
+      <Provider store={store}>
+        <MuiThemeProvider theme={theme}>
+          <SearchAppBar />
+          <Router>
+            <div className="App">
+              <Switch>
+                <Route exact path="/" component={Homepage} />
+                <Route exact path="/shop" component={Dashboard} />
+                <Route path="/login" component={LogIn} />
+                <Route path="/register" component={SignUp} />
+                <Route path="/details/:id" component={Detail} />
+              </Switch>
+            </div>
+          </Router>
+          <Footer />
+        </MuiThemeProvider>
+      </Provider>
     );
   }
 }

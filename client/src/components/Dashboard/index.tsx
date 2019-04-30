@@ -10,12 +10,13 @@ import {
   TextField,
   MenuItem
 } from "@material-ui/core";
+import { Dispatch } from "redux";
 import SearchIcon from "@material-ui/icons/Search";
 import { grey } from "@material-ui/core/colors";
 import FilterList from "./FilterList";
 import Item from "./Item";
 import FilterInterface from "./FilterInterface";
-import ItemStructure from "./ItemStructure";
+import { ItemStructure } from "../../types/types";
 import FlatPagination from "./FlatPagination";
 import item_list from "./DataList";
 
@@ -210,7 +211,9 @@ class Index extends React.Component<Props, State> {
     switch (sort) {
       case 0:
         newList.sort((a, b) => {
-          return a.id - b.id;
+          if (a.id > b.id) return 1;
+          else if (a.id < b.id) return -1;
+          else return 0;
         });
         break;
       case 1:
@@ -343,5 +346,12 @@ class Index extends React.Component<Props, State> {
     );
   }
 }
+
+// const mapDispatchToProps = (dispatch: Dispatch) => ({
+//   handleAddCart(item: ItemStructure) {
+//     // console.log(item);
+//     dispatch(addCart(item));
+//   }
+// });
 
 export default withStyles(styles)(Index);

@@ -10,7 +10,13 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import QuickView from "./QuickView";
-import ItemStructure from "./ItemStructure";
+import { ItemStructure } from "../../types/types";
+
+/*redux*/
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import addCart from "../../actionCreators/addCart";
+import toggleCart from "../../actionCreators/toggleCart";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -39,6 +45,7 @@ interface Props extends WithStyles<typeof styles> {
   keyItem: number;
   item: ItemStructure;
   itemName: string;
+  handleAddCart: typeof addCart;
 }
 
 interface State {
@@ -88,7 +95,7 @@ class Item extends React.Component<Props, State> {
             height: 300,
             backgroundImage: `url(${
               process.env.PUBLIC_URL
-            }/sneaker${keyPic}.png), linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)`,
+            }/sneaker${keyPic}.png)`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -136,7 +143,6 @@ class Item extends React.Component<Props, State> {
                 variant="h6"
                 className={classes.title}
                 color="primary"
-                // style={{ color: "#e62e49" }}
               >
                 ${price_discount}.00
               </Typography>
@@ -159,6 +165,7 @@ class Item extends React.Component<Props, State> {
             keyPic={keyPic}
             item={item}
             popUp_view={this.popUp_view}
+            handleAddCart={this.props.handleAddCart}
           />
         )}
       </Grid>
@@ -166,4 +173,16 @@ class Item extends React.Component<Props, State> {
   }
 }
 
-export default withStyles(styles)(Item);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  handleAddCart(item: ItemStructure) {
+    dispatch(addCart(item));
+    dispatch(toggleCart());
+  }
+});
+
+export default withStyles(styles)(
+  connect(
+    null,
+    mapDispatchToProps
+  )(Item)
+);
