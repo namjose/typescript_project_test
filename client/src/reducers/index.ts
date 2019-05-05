@@ -1,6 +1,15 @@
 import { combineReducers } from "redux";
 import cartReducer from "./cartReducer";
+import authReducer from "./authReducer";
+import { AuthState, CartInterface } from "../types/types";
 
-export const rootReducer = combineReducers({ cart: cartReducer });
+// The top-level state object
+export interface ApplicationState {
+  cart: CartInterface;
+  auth: AuthState;
+}
 
-export type AppState = ReturnType<typeof rootReducer>;
+export const rootReducer = combineReducers<ApplicationState>({
+  cart: cartReducer,
+  auth: authReducer
+});

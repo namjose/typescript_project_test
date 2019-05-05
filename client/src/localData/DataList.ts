@@ -1,4 +1,4 @@
-import { ItemStructure } from "../../types/types";
+import { ItemStructure } from "../types/types";
 const item_list: ItemStructure[] = [
   {
     id: "1",
@@ -7,7 +7,8 @@ const item_list: ItemStructure[] = [
     brand: "adidas",
     gender: "male",
     price: 250,
-    discount: 0.5
+    discount: 0.5,
+    img: "3"
   },
   {
     id: "2",
@@ -16,7 +17,8 @@ const item_list: ItemStructure[] = [
     brand: "adidas",
     gender: "male",
     price: 250,
-    discount: 0.5
+    discount: 0.5,
+    img: "1"
   },
   {
     id: "3",
@@ -25,7 +27,8 @@ const item_list: ItemStructure[] = [
     brand: "adidas",
     gender: "male",
     price: 150,
-    discount: 0.5
+    discount: 0.5,
+    img: "2"
   },
   {
     id: "4",
@@ -34,7 +37,8 @@ const item_list: ItemStructure[] = [
     brand: "adidas",
     gender: "male",
     price: 250,
-    discount: 0.5
+    discount: 0.5,
+    img: "3"
   },
   {
     id: "5",
@@ -43,7 +47,8 @@ const item_list: ItemStructure[] = [
     brand: "nike",
     gender: "female",
     price: 350,
-    discount: 0.5
+    discount: 0.5,
+    img: "1"
   },
   {
     id: "6",
@@ -52,7 +57,8 @@ const item_list: ItemStructure[] = [
     brand: "nike",
     gender: "female",
     price: 150,
-    discount: 0.5
+    discount: 0.5,
+    img: "2"
   },
   {
     id: "7",
@@ -61,7 +67,8 @@ const item_list: ItemStructure[] = [
     brand: "adidas",
     gender: "female",
     price: 200,
-    discount: 0.5
+    discount: 0.5,
+    img: "3"
   },
   {
     id: "8",
@@ -70,7 +77,8 @@ const item_list: ItemStructure[] = [
     brand: "adidas",
     gender: "female",
     price: 200,
-    discount: 0.5
+    discount: 0.5,
+    img: "1"
   },
   {
     id: "9",
@@ -79,7 +87,8 @@ const item_list: ItemStructure[] = [
     brand: "adidas",
     gender: "male",
     price: 150,
-    discount: 0.5
+    discount: 0.5,
+    img: "2"
   },
   {
     id: "10",
@@ -88,7 +97,8 @@ const item_list: ItemStructure[] = [
     brand: "puma",
     gender: "male",
     price: 100,
-    discount: 0.5
+    discount: 0.5,
+    img: "3"
   }
 ];
 

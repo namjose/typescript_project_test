@@ -6,17 +6,16 @@ import {
   Typography,
   Theme,
   withStyles,
-  WithStyles
+  WithStyles,
+  Link
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import QuickView from "./QuickView";
 import { ItemStructure } from "../../types/types";
 
 /*redux*/
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import addCart from "../../actionCreators/addCart";
-import toggleCart from "../../actionCreators/toggleCart";
+import { addCart, toggleCart } from "../../actionCreators/cartActions";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -42,9 +41,7 @@ const styles = (theme: Theme) =>
   });
 
 interface Props extends WithStyles<typeof styles> {
-  keyItem: number;
   item: ItemStructure;
-  itemName: string;
   handleAddCart: typeof addCart;
 }
 
@@ -53,7 +50,7 @@ interface State {
   isHidden: boolean;
 }
 
-class Item extends React.Component<Props, State> {
+class ItemCard extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
   }
@@ -76,26 +73,16 @@ class Item extends React.Component<Props, State> {
   };
 
   render() {
-    const { classes, keyItem, itemName, item } = this.props;
-    const { name, color, brand, gender, price, discount } = item;
+    const { classes, item } = this.props;
+    const { id, name, color, brand, gender, price, discount, img } = item;
     const price_discount = price * discount;
     const { isHovered, isHidden } = this.state;
-    let keyPic = 0;
-    if (brand.indexOf("nike") > -1) {
-      keyPic = 3;
-    } else if (brand.indexOf("adidas") > -1) {
-      keyPic = (keyItem % 2) + 1;
-    } else {
-      keyPic = 4;
-    }
     return (
-      <Grid key={keyItem} item xs={12} sm={6} md={3}>
+      <React.Fragment>
         <div
           style={{
             height: 300,
-            backgroundImage: `url(${
-              process.env.PUBLIC_URL
-            }/sneaker${keyPic}.png)`,
+            backgroundImage: `url(${process.env.PUBLIC_URL}/sneaker${img}.png)`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -125,7 +112,7 @@ class Item extends React.Component<Props, State> {
         </div>
         <div>
           <Typography align="left" variant="h5" className={classes.title}>
-            <Link to={`/details/${keyItem}`}>
+            <Link underline="none" href={`/products/${id}`}>
               {name} - {brand.toUpperCase()}
             </Link>
           </Typography>
@@ -161,14 +148,12 @@ class Item extends React.Component<Props, State> {
         </div>
         {isHidden ? null : (
           <QuickView
-            key={keyItem}
-            keyPic={keyPic}
             item={item}
             popUp_view={this.popUp_view}
             handleAddCart={this.props.handleAddCart}
           />
         )}
-      </Grid>
+      </React.Fragment>
     );
   }
 }
@@ -184,5 +169,5 @@ export default withStyles(styles)(
   connect(
     null,
     mapDispatchToProps
-  )(Item)
+  )(ItemCard)
 );

@@ -6,22 +6,23 @@ import {
   TOGGLE_CART
 } from "../types/types";
 
-const initialState: CartInterface = {
+export const initialState: CartInterface = {
   showCartDrawer: false,
   purchasedItem: [
     {
-      id: "1",
+      id: "100",
       name: "ULTRABOOST",
       color: "red",
       brand: "adidas",
       gender: "male",
       price: 250,
-      discount: 0.5
+      discount: 0.5,
+      img: "1"
     }
   ],
   total: 250 * 0.5
 };
-//state = initialState (default state)
+
 export default function cartReducer(
   state = initialState,
   action: CartActionTypes
@@ -29,6 +30,7 @@ export default function cartReducer(
   switch (action.type) {
     case ADD_CART:
       let discountPrice = action.payload.price * action.payload.discount;
+      console.log(state);
       return {
         ...state,
         purchasedItem: [...state.purchasedItem, action.payload],

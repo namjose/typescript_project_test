@@ -20,8 +20,7 @@ import AddressForm from "./AddressForm";
 const styles = (theme: Theme) =>
   createStyles({
     card__header: {
-      backgroundImage:
-        "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
+      backgroundColor: theme.palette.primary.main,
       padding: "5px"
     },
     root: {

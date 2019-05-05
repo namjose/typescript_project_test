@@ -20,15 +20,13 @@ import {
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { CartInterface } from "../types/types";
-import { AppState } from "../reducers/";
+import { ApplicationState } from "../reducers/";
 import { Dispatch } from "redux";
-import deleteCart from "../actionCreators/deleteCart";
-import toggleCart from "../actionCreators/toggleCart";
+import { deleteCart, toggleCart } from "../actionCreators/cartActions";
 const styles = (theme: Theme) =>
   createStyles({
     header: {
-      backgroundImage:
-        "linear-gradient(to left bottom, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)"
+      backgroundColor: "black"
     },
     list: {
       width: 300
@@ -113,7 +111,12 @@ class CartDrawer extends React.Component<Props> {
                         <div
                           style={{
                             height: "100%",
-                            backgroundColor: "pink"
+                            backgroundImage: `url(${
+                              process.env.PUBLIC_URL
+                            }/sneaker${item.img}.png)`,
+                            backgroundSize: "contain",
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "center"
                           }}
                         />
                       </Grid>
@@ -207,14 +210,15 @@ class CartDrawer extends React.Component<Props> {
                 variant="contained"
                 color="primary"
                 className={classes.button}
+                href="/checkout"
               >
                 <Typography variant="button" color="secondary">
                   PROCEED TO CHECKOUT
                 </Typography>
               </Button>
               <Button
-                variant="outlined"
-                color="primary"
+                variant="contained"
+                color="secondary"
                 className={classes.button}
                 onClick={handleToggleCart}
               >
@@ -232,7 +236,7 @@ class CartDrawer extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: AppState) => ({
+const mapStateToProps = (state: ApplicationState) => ({
   cart: state.cart
 });
 
@@ -240,7 +244,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleDeleteCart(itemId: string) {
     dispatch(deleteCart(itemId));
   },
-  handleToggleCart(newState: CartInterface) {
+  handleToggleCart() {
     dispatch(toggleCart());
   }
 });

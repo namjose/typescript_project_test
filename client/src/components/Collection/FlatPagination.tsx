@@ -13,7 +13,7 @@ export default function FlatPagination(props: Props) {
   return (
     <Pagination
       currentPageColor="default"
-      otherPageColor="primary"
+      otherPageColor="default"
       limit={limit}
       offset={offset}
       total={total}

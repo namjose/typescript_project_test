@@ -66,7 +66,7 @@ function Footer(props: Props) {
   const { classes } = props;
   return (
     <React.Fragment>
-      <Grid
+      {/* <Grid
         container
         xs={12}
         className={classes.signup_discount}
@@ -89,7 +89,7 @@ function Footer(props: Props) {
                 SIGN UP
               </Typography>
             </Button>
-            {/* <Grid item xs={6}>
+            <Grid item xs={6}>
               <Typography
                 variant="body1"
                 classes={{
@@ -100,10 +100,11 @@ function Footer(props: Props) {
                 You will receive a 15% discount code in registered email. The
                 code is applied for full priced item and saled item
               </Typography>
-            </Grid> */}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Grid> */}
+      <Divider />
       <Grid container xs={12} className={classes.root}>
         <Grid item xs={2}>
           <Typography variant="h6" className={classes.footerText}>

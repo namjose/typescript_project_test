@@ -14,11 +14,10 @@ import { Dispatch } from "redux";
 import SearchIcon from "@material-ui/icons/Search";
 import { grey } from "@material-ui/core/colors";
 import FilterList from "./FilterList";
-import Item from "./Item";
-import FilterInterface from "./FilterInterface";
-import { ItemStructure } from "../../types/types";
+import ItemCard from "../ItemCard";
+import { ItemStructure, FilterInterface } from "../../types/types";
 import FlatPagination from "./FlatPagination";
-import item_list from "./DataList";
+import item_list from "../../localData/DataList";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -73,7 +72,6 @@ interface Props extends WithStyles<typeof styles> {}
 
 interface State {
   user: string;
-  // search: string;
   sort: number;
   list_products: ItemStructure[];
   filter: FilterInterface;
@@ -83,12 +81,11 @@ interface State {
   total: number;
 }
 
-class Index extends React.Component<Props, State> {
+class Collection extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
       user: "namjose",
-      // search: "",
       sort: 0,
       list_products: [], //original
       filter: filter,
@@ -108,9 +105,13 @@ class Index extends React.Component<Props, State> {
     this.setState({ total: item_list.length });
   }
 
-  updateList = async (newList: ItemStructure[]) => {
-    await this.setState({ update_list: newList });
-    await this.setState({ total: this.state.update_list.length });
+  updateList = (newList: ItemStructure[]) => {
+    this.setState({ update_list: newList }, () =>
+      this.setState(prevState => {
+        return { total: prevState.update_list.length };
+      })
+    );
+    // await this.setState({ total: this.state.update_list.length });
   };
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -251,7 +252,6 @@ class Index extends React.Component<Props, State> {
   }
 
   handleClick = (e: React.MouseEvent, offset: number) => {
-    console.log(offset);
     this.setState({ offset });
   };
 
@@ -327,7 +327,9 @@ class Index extends React.Component<Props, State> {
                   )
                   .map((item, index) => {
                     return (
-                      <Item keyItem={index} itemName={item.name} item={item} />
+                      <Grid key={item.id} item xs={12} sm={6} md={3}>
+                        <ItemCard item={item} />
+                      </Grid>
                     );
                   })
               )}
@@ -347,11 +349,4 @@ class Index extends React.Component<Props, State> {
   }
 }
 
-// const mapDispatchToProps = (dispatch: Dispatch) => ({
-//   handleAddCart(item: ItemStructure) {
-//     // console.log(item);
-//     dispatch(addCart(item));
-//   }
-// });
-
-export default withStyles(styles)(Index);
+export default withStyles(styles)(Collection);

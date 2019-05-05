@@ -24,9 +24,8 @@ import {
 import Icon from "@material-ui/core/Icon";
 import classNames from "classnames";
 import { StarBorder, LocationOn, InfoOutlined } from "@material-ui/icons";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import addCart from "../../actionCreators/addCart";
+import ShareList from "../Detail/ShareList";
+import { addCart } from "../../actionCreators/cartActions";
 import { ItemStructure } from "../../types/types";
 
 const styles = (theme: Theme) =>
@@ -106,8 +105,6 @@ const styles = (theme: Theme) =>
 interface Props extends WithStyles<typeof styles> {
   popUp_view: any;
   item: ItemStructure;
-  key: number;
-  keyPic: number;
   handleAddCart: typeof addCart;
 }
 interface State {
@@ -133,16 +130,16 @@ class QuickView extends React.Component<Props, State> {
     this.setState({ [name]: value } as Pick<State, keyof State>);
   };
 
-  handleClickCollapse = (e: React.MouseEvent) => {
-    this.setState(prevState => ({
-      openD: !prevState.openD
-    }));
-  };
-
-  handleClickCollapse2 = (e: React.MouseEvent) => {
-    this.setState(prevState => ({
-      openS: !prevState.openS
-    }));
+  handleClickCollapse = (stateName: string) => {
+    if (stateName === "openD") {
+      this.setState(prevState => ({
+        openD: !prevState[stateName]
+      }));
+    } else if (stateName === "openS") {
+      this.setState(prevState => ({
+        openS: !prevState[stateName]
+      }));
+    }
   };
 
   handleClickAddButton = (e: React.MouseEvent) => {
@@ -151,33 +148,25 @@ class QuickView extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      classes,
-      popUp_view,
-      item,
-      key,
-      keyPic,
-      handleAddCart
-    } = this.props;
-    const { name, color, brand, gender, price, discount } = item;
+    const { classes, popUp_view, item, handleAddCart } = this.props;
+    const { id, name, color, brand, gender, price, discount, img } = item;
     const price_discount = price * discount;
     const { size, openD } = this.state;
     return (
-      <div key={key} className={classes.root}>
+      <div key={id} className={classes.root}>
         <div className={classes.mainView}>
           <Grid container xs={12} className={classes.container3}>
             <Grid item xs={12} md={6}>
               <div
                 style={{
                   height: 700,
+                  backgroundColor: "white",
                   backgroundImage: `url(${
                     process.env.PUBLIC_URL
-                  }/sneaker${keyPic}.png), linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)`,
+                  }/sneaker${img}.png)`,
                   backgroundSize: "contain",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
-                  // backgroundImage:
-                  //   "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
                   paddingTop: 5,
                   borderRadius: 5
                 }}
@@ -314,128 +303,12 @@ class QuickView extends React.Component<Props, State> {
                   Description
                 </Typography>
               </Grid>
-              {/* <Divider />
-              <Grid item>
-                <List>
-                  <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <LocalShippingOutlined />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary="Delivery" />
-                    {this.state.openD ? (
-                      <IconButton onClick={this.handleClickCollapse}>
-                        <ExpandLess />
-                      </IconButton>
-                    ) : (
-                      <IconButton onClick={this.handleClickCollapse}>
-                        <ExpandMore />
-                      </IconButton>
-                    )}
-                  </ListItem>
-                  <Collapse in={this.state.openD} timeout="auto">
-                    <List>
-                      <ListItem>
-                        <ListItemText
-                          primary={
-                            <Typography variant="h5" className={classes.title}>
-                              Vietnam
-                            </Typography>
-                          }
-                        />
-                      </ListItem>
-                      <ListItem>
-                        <ListItemText primary="Standard Shipping" />
-                        $5.00
-                      </ListItem>
-                      <ListItem>
-                        <ListItemText primary="Free Standard Shipping" />
-                        $0.00
-                      </ListItem>
-                      <ListItem>
-                        <ListItemText primary="Express Standard Shipping" />
-                        $15.00
-                      </ListItem>
-                    </List>
-                  </Collapse>
-                </List>
-              </Grid> */}
               <br />
               <Divider />
-              <Grid item>
-                <List>
-                  <ListItem className={classes.list__item}>
-                    <ListItemAvatar>
-                      <Avatar style={{ backgroundColor: "#ff8096" }}>
-                        <Icon
-                          className={classNames(
-                            classes.icon,
-                            "fas fa-share-alt"
-                          )}
-                          color="secondary"
-                        />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary="Share" />
-                    {this.state.openS ? (
-                      <IconButton onClick={this.handleClickCollapse2}>
-                        <ExpandLess />
-                      </IconButton>
-                    ) : (
-                      <IconButton onClick={this.handleClickCollapse2}>
-                        <ExpandMore />
-                      </IconButton>
-                    )}
-                  </ListItem>
-                  <Collapse in={this.state.openS} timeout="auto">
-                    <List>
-                      <IconButton>
-                        <Icon
-                          className={classNames(
-                            classes.icon,
-                            "fab fa-facebook-square"
-                          )}
-                          color="primary"
-                        />
-                      </IconButton>
-                      <IconButton>
-                        <Icon
-                          className={classNames(
-                            classes.icon,
-                            "fab fa-twitter-square"
-                          )}
-                          color="primary"
-                        />
-                      </IconButton>
-                      <IconButton>
-                        <Icon
-                          className={classNames(
-                            classes.icon,
-                            "fab fa-google-plus-square"
-                          )}
-                          color="primary"
-                        />
-                      </IconButton>
-                      <IconButton>
-                        <Icon
-                          className={classNames(
-                            classes.icon,
-                            "fab fa-pinterest-square"
-                          )}
-                          color="primary"
-                        />
-                      </IconButton>
-                      <IconButton>
-                        <Icon
-                          className={classNames(classes.icon, "fas fa-at")}
-                          color="primary"
-                        />
-                      </IconButton>
-                    </List>
-                  </Collapse>
-                </List>
-              </Grid>
+              <ShareList
+                handleClickCollapse={this.handleClickCollapse}
+                open={this.state.openS}
+              />
             </Grid>
           </Grid>
         </div>

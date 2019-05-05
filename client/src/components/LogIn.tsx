@@ -10,23 +10,26 @@ import {
   Theme,
   Typography,
   withStyles,
-  WithStyles
+  WithStyles,
+  Button,
+  TextField
 } from "@material-ui/core";
-import AppBar from "@material-ui/core/AppBar";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
+import { Dispatch, Action } from "redux";
+import { logIn } from "../actionCreators/authActions";
 import { AccountCircle, Visibility, VisibilityOff } from "@material-ui/icons";
+import { AuthState, AuthActionTypes } from "../types/types";
+import { ApplicationState } from "../reducers";
+import { Redirect } from "react-router-dom";
 
 const styles = (theme: Theme) =>
   createStyles({
     card__header: {
-      backgroundImage:
-        "linear-gradient(to right top, #5217ef, #671ced, #7822ea, #8629e8, #9330e6, #a633df, #b738d8, #c43fd2, #d648c6, #e454bc, #ee63b4, #f472ae)",
+      backgroundColor: theme.palette.primary.main,
       padding: "5px"
     },
     root: {
       display: "inline-block",
-      // flexWrap: 'wrap',
       flexGrow: 1,
       margin: "50px",
       flexDirection: "column",
@@ -42,7 +45,11 @@ const styles = (theme: Theme) =>
     }
   });
 
-interface Props extends WithStyles<typeof styles> {}
+interface Props extends WithStyles<typeof styles> {
+  history: any;
+  auth: AuthState;
+  handleSubmit: typeof logIn;
+}
 
 interface State {
   username: string;
@@ -58,6 +65,8 @@ class LogIn extends React.Component<Props, State> {
       password: "",
       showPassword: false
     };
+
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   handleClickShowPassword = () => {
@@ -69,8 +78,20 @@ class LogIn extends React.Component<Props, State> {
     this.setState({ [name]: value } as Pick<State, keyof State>);
   };
 
+  onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { username, password } = this.state;
+    if (!username || !password) {
+      console.log("Chua dien du thong tin");
+    } else {
+      this.props.handleSubmit();
+      this.props.history.push("/");
+      // const auth = { username, password };
+    }
+  };
+
   render() {
-    const { handleChange } = this;
+    const { handleChange, onSubmit } = this;
     const { showPassword } = this.state;
     const { classes } = this.props;
     return (
@@ -82,65 +103,67 @@ class LogIn extends React.Component<Props, State> {
             </Typography>
           </Grid>
           <CardContent>
-            <Grid container spacing={16}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  variant="outlined"
-                  id="username"
-                  name="username"
-                  label="Username"
-                  className={classes.textField}
-                  value={this.state.username}
-                  onChange={handleChange}
-                  margin="normal"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AccountCircle />
-                      </InputAdornment>
-                    )
-                  }}
-                />
+            <form onSubmit={onSubmit}>
+              <Grid container spacing={16}>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    variant="outlined"
+                    id="username"
+                    name="username"
+                    label="Username"
+                    className={classes.textField}
+                    value={this.state.username}
+                    onChange={handleChange}
+                    margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <AccountCircle />
+                        </InputAdornment>
+                      )
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    variant="outlined"
+                    id="password"
+                    name="password"
+                    label="Password"
+                    className={classes.textField}
+                    type={showPassword ? "text" : "password"}
+                    value={this.state.password}
+                    onChange={handleChange}
+                    margin="normal"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="Toggle password visibility"
+                            onClick={this.handleClickShowPassword}
+                          >
+                            {this.state.showPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    }}
+                  />
+                </Grid>
+                <Grid container item justify="center" xs={12}>
+                  <Button type="submit" variant="contained" color="primary">
+                    <Typography variant="button" color="secondary">
+                      LOG IN
+                    </Typography>
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  variant="outlined"
-                  id="password"
-                  name="password"
-                  label="Password"
-                  className={classes.textField}
-                  type={showPassword ? "text" : "password"}
-                  value={this.state.password}
-                  onChange={handleChange}
-                  margin="normal"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="Toggle password visibility"
-                          onClick={this.handleClickShowPassword}
-                        >
-                          {this.state.showPassword ? (
-                            <VisibilityOff />
-                          ) : (
-                            <Visibility />
-                          )}
-                        </IconButton>
-                      </InputAdornment>
-                    )
-                  }}
-                />
-              </Grid>
-              <Grid item container justify="center" xs={12}>
-                <Button variant="contained" color="primary">
-                  <Typography variant="button" color="secondary">
-                    LOG IN
-                  </Typography>
-                </Button>
-              </Grid>
-            </Grid>
+            </form>
           </CardContent>
         </Card>
       </main>
@@ -148,4 +171,19 @@ class LogIn extends React.Component<Props, State> {
   }
 }
 
-export default withStyles(styles)(LogIn);
+const mapStateToProps = (state: ApplicationState) => ({
+  auth: state.auth
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<AuthActionTypes>) => ({
+  handleSubmit() {
+    dispatch(logIn());
+  }
+});
+
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(LogIn)
+);

@@ -17,7 +17,7 @@ import {
   Collapse,
   Checkbox
 } from "@material-ui/core";
-import FilterInterface from "./FilterInterface";
+import { FilterInterface } from "../../types/types";
 
 const styles = (theme: Theme) =>
   createStyles({

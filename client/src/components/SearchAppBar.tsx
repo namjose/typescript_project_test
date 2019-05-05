@@ -104,7 +104,7 @@ function SearchAppBar(props: Props) {
               DC CONNECT
             </Typography>
           </Button>
-          <Button href="/shop">
+          <Button href="/collections/mens">
             <Typography variant="h6" color="secondary">
               Men
             </Typography>
